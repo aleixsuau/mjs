@@ -1,13 +1,45 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { AgendaComponent } from './agenda/agenda.component';
+import { NewsComponent } from './news/news.component';
+import { WorkComponent } from './work/work.component';
+
+import { AgendaService } from './agenda/agenda.service';
+
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  let AgendaServiceFake: AgendaService;
+  beforeEach(async(() => {    
+    // fake AgendaService for test purposes
+    AgendaServiceFake = {
+      agenda : [
+          {
+              title: 'item1 title',
+              description: 'item1 description',
+              date: '01/08',
+              time: '18:00'
+          },
+          {
+              title: 'item2 title',
+              description: 'item2 description',
+              date: '01/09',
+              time: '18:00'
+          }
+      ],
+      getAgenda: function() {
+          return this.agenda;
+      }
+    };
+
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        AgendaComponent,
+        NewsComponent,
+        WorkComponent
       ],
+      providers: [ {provide: AgendaService, useValue: AgendaServiceFake} ]
     }).compileComponents();
   }));
 

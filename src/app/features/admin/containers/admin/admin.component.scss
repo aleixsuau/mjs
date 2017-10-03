@@ -1,0 +1,29 @@
+.row {
+    height: 90px;
+    font-size: 18px;
+}
+
+.margin_right{
+    margin-right: 20px;
+}
+
+.buttons-container {
+    padding: 10px;
+    h2 {
+        margin-bottom: 5px;
+    }
+}
+
+.add-button {
+    float: right;
+    padding: 10px;
+    padding-right: 30px;
+}
+
+.active {
+    background-color: #ffc107;
+}
+
+.mat-input-container {
+    width: 100%;
+}

@@ -1,0 +1,271 @@
+<div class="buttons-container">
+  <h2>Administrar:</h2>
+  <button md-raised-button
+          (click)="formSection = 'events'"
+          [ngClass]="{ 'active': formSection === 'events' }"
+          class="round-button">
+          EVENTS
+  </button>
+  <button md-raised-button
+          (click)="formSection = 'news'"
+          [ngClass]="{ 'active': formSection === 'news' }"
+          class="round-button">
+          NEWS
+  </button>
+  <button md-raised-button
+          (click)="formSection = 'works'"
+          [ngClass]="{ 'active': formSection === 'works' }"
+          class="round-button">
+          WORKS
+  </button>
+</div>
+
+<md-card *ngIf="formSection === 'events'">
+  <table td-data-table>
+    <th td-data-table-column
+        *ngFor="let column of eventsTableColumns">
+        {{ column.label }}
+    </th>
+    <th td-data-table-column>
+      <md-icon>edit</md-icon>
+    </th>
+    <th td-data-table-column>
+      <md-icon>delete</md-icon>
+    </th>
+    <tr td-data-table-row *ngFor="let event of events | async">
+      <td td-data-table-cell>
+        {{ event.id }}
+      </td>
+      <td td-data-table-cell>
+        {{ event.title }}
+      </td>
+      <td td-data-table-cell>
+        {{ event.description | truncate: 30 }}
+      </td>
+      <td td-data-table-cell>
+        {{ event.date }}
+      </td>
+      <td td-data-table-cell>
+        {{ event.time }}
+      </td>
+      <td td-data-table-cell>
+        {{ event.image  | truncate: 30 }}
+      </td>
+      <td td-data-table-cell (click)="openEditDialog(event, formSection)">
+        <button md-mini-fab color="accent">
+          <md-icon>edit</md-icon>
+        </button>
+      </td>
+      <td td-data-table-cell (click)="openNotifyDialog(event, formSection)">
+        <button md-mini-fab color="warn">
+          <md-icon>delete</md-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</md-card>
+
+<md-card *ngIf="formSection === 'news'">
+  <table td-data-table>
+    <th td-data-table-column
+        *ngFor="let column of newsTableColumns">
+        {{ column.label }}
+    </th>
+    <th td-data-table-column>
+      <md-icon>edit</md-icon>
+    </th>
+    <th td-data-table-column>
+      <md-icon>delete</md-icon>
+    </th>
+    <tr td-data-table-row *ngFor="let new of news | async">
+      <td td-data-table-cell>
+        {{ new.id }}
+      </td>
+      <td td-data-table-cell>
+        {{ new.title }}
+      </td>
+      <td td-data-table-cell>
+        {{ new.description | truncate: 30 }}
+      </td>
+      <td td-data-table-cell>
+        {{ new.date }}
+      </td>
+      <td td-data-table-cell>
+        {{ new.time }}
+      </td>
+      <td td-data-table-cell>
+        {{ new.image  | truncate: 30 }}
+      </td>
+      <td td-data-table-cell (click)="openEditDialog(new, formSection)">
+        <button md-mini-fab color="accent">
+          <md-icon>edit</md-icon>
+        </button>
+      </td>
+      <td td-data-table-cell (click)="openNotifyDialog(new, formSection)">
+        <button md-mini-fab color="warn">
+          <md-icon>delete</md-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</md-card>
+
+<md-card *ngIf="formSection === 'works'">
+  <table td-data-table>
+    <th td-data-table-column
+        *ngFor="let column of worksTableColumns">
+        {{ column.label }}
+    </th>
+    <th td-data-table-column>
+      <md-icon>edit</md-icon>
+    </th>
+    <th td-data-table-column>
+      <md-icon>delete</md-icon>
+    </th>
+    <tr td-data-table-row *ngFor="let work of works | async">
+      <td td-data-table-cell>
+        {{ work.id }}
+      </td>
+      <td td-data-table-cell>
+        {{ work.title }}
+      </td>
+      <td td-data-table-cell>
+        {{ work.description | truncate: 30 }}
+      </td>
+      <td td-data-table-cell>
+        {{ work.date }}
+      </td>
+      <td td-data-table-cell>
+        {{ work.time }}
+      </td>
+      <td td-data-table-cell>
+        {{ work.image  | truncate: 30 }}
+      </td>
+      <td td-data-table-cell (click)="openEditDialog(work, formSection)">
+        <button md-mini-fab color="accent">
+          <md-icon>edit</md-icon>
+        </button>
+      </td>
+      <td td-data-table-cell (click)="openNotifyDialog(work, formSection)">
+        <button md-mini-fab color="warn">
+          <md-icon>delete</md-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</md-card>
+<div class="add-button">
+  <button md-fab
+          (click)="openEditDialog('', formSection)"
+          color="accent">
+    <md-icon>add</md-icon>
+  </button>
+</div>
+
+<!--<td-data-table
+  #dataTable
+  [data]="events | async"
+  [columns]="tableColumnsConfig"
+  [clickable]="clickable"
+  [multiple]="multiple"
+  [sortable]="true"
+  [sortBy]="sortBy"
+  [sortOrder]="sortOrder"
+  (sortChange)="sort($event)">
+</td-data-table>-->
+
+<!--<md-card>
+  <md-card-title>
+    <h3>Añadir Eventos</h3>
+  </md-card-title>
+  <md-card-subtitle>
+    <h2>Últimas noticias de Mallorca JS</h2>
+  </md-card-subtitle>
+  <md-card-content>
+    <div layout="column" class="container">
+        <form [formGroup]="adminForm">
+          <div layout="row" class="row">
+            <div flex class="margin_right">
+              <md-input-container>
+                <input mdInput
+                      formControlName="date"
+                      type="date"
+                      placeholder="Date">
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-input-container>
+                <input mdInput
+                      formControlName="time"
+                      type="time"
+                      placeholder="Hour">
+              </md-input-container>
+            </div>
+          </div>
+          <div layout="row" class="row">
+            <md-input-container>
+              <input mdInput
+                    formControlName="title"
+                    type="text"
+                    placeholder="Title">
+            </md-input-container>
+          </div>
+          <div layout="row" class="row">
+            <md-input-container>
+              <textarea mdInput
+                        formControlName="description"
+                        type="text"
+                        size="200"
+                        placeholder="Descripción">
+              </textarea>
+            </md-input-container>
+          </div>
+          <div formArrayName="speakers">
+            <h2>Speakers</h2>
+            <div *ngFor="let speaker of speakers.controls; let i = index"
+                [formGroupName]="i"
+                layout="row" class="row">
+                <div flex class="margin_right">
+                  <md-input-container>
+                    <input mdInput
+                          formControlName="name"
+                          type="text"
+                          size="20"
+                          placeholder="Name">
+                  </md-input-container>
+                </div>
+                <div flex>
+                  <md-input-container>
+                    <input mdInput
+                          formControlName="contact"
+                          type="text"
+                          size="20"
+                          placeholder="Contact">
+                  </md-input-container>
+                </div>
+                <button md-mini-fab
+                        *ngIf="speakers.controls.length > 1"
+                        (click)="removeSpeaker(i)"
+                        type="button">
+                  -
+                </button>
+            </div>
+          </div>
+        </form>
+
+        <div layout="row">
+          <button md-mini-fab type="button" (click)="addSpeaker(event)">
+            +
+          </button>
+          <button md-raised-button type="button" (click)="logStatus(event)">
+            Log Form status
+          </button>
+          form: {{ adminForm.value | json }}<br>
+          status: {{ adminForm.status | json }}<br>
+          status: {{ adminForm.get('title').touched | json }}
+        </div>
+    </div>
+  </md-card-content>
+</md-card>-->
+
+

@@ -1,0 +1,19 @@
+<md-card>
+  <md-card-title>
+    <h3>Agenda</h3>
+  </md-card-title>
+  <md-card-subtitle>
+    <h2>Próximos eventos de Mallorca JS</h2>
+  </md-card-subtitle>
+  <md-card-content>
+    <app-event *ngFor="let item of collection | async"
+               [item]="item">
+    </app-event>
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button
+            (click)="create()">
+            ADD
+    </button>
+  </md-card-actions>
+</md-card>

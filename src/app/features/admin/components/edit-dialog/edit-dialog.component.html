@@ -1,0 +1,96 @@
+<div class="editDialog">
+  <h1 md-dialog-title>Dialog</h1>
+  <div md-dialog-content>
+    <div layout="column" class="container">        
+        <form [formGroup]="editForm">
+          <div layout="row" layout-margin>
+            <div flex>
+              <md-input-container>
+                <input mdInput
+                      formControlName="date"
+                      type="date"
+                      placeholder="Date">
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-input-container>
+                <input mdInput
+                      formControlName="time"
+                      type="time"
+                      placeholder="Hour">
+              </md-input-container>
+            </div>
+          </div>      
+          <div layout="row" layout-margin>
+            <md-input-container>
+              <input mdInput
+                    formControlName="title"
+                    type="text"
+                    placeholder="Title">
+            </md-input-container>
+          </div>
+          <div layout="row" layout-margin>
+            <md-input-container>
+              <textarea mdInput
+                        formControlName="description"
+                        type="text"
+                        placeholder="Descripción">
+              </textarea>
+            </md-input-container>
+          </div>
+          <div layout="row" layout-margin>
+            <md-input-container>
+              <textarea mdInput
+                        formControlName="image"
+                        type="text"
+                        placeholder="Image">
+              </textarea>
+            </md-input-container>
+          </div>
+          <!--<div formArrayName="speakers">
+            <h2>Speakers</h2>
+            <div *ngFor="let speaker of speakers.controls; let i = index"
+                [formGroupName]="i"
+                layout="row" layout-margin>
+                <div flex>
+                  <md-input-container>
+                    <input mdInput
+                          formControlName="name"
+                          type="text"
+                          size="20"
+                          placeholder="Name">
+                    </md-input-container>
+                </div>
+                <div flex>
+                  <md-input-container>          
+                    <input mdInput
+                          formControlName="contact"
+                          type="text"
+                          size="20"
+                          placeholder="Contact">
+                  </md-input-container>
+                </div>
+                <button md-mini-fab
+                        *ngIf="speakers.controls.length > 1"
+                        (click)="removeSpeaker(i)" 
+                        type="button">
+                  -
+                </button>
+            </div>
+          </div>-->
+        </form>
+    </div>    
+  </div>
+  <div layout="row">
+      <div md-dialog-actions>
+        <button md-button
+                [md-dialog-close]="editForm.value"
+                [disabled]="editForm.invalid">
+                <!--[md-dialog-close]="true"-->
+                  <md-icon>save</md-icon>   
+                  Salvar
+        </button>
+        <button md-button md-dialog-close>Close</button>
+      </div>
+  </div>
+</div>

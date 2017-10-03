@@ -1,0 +1,11 @@
+<md-card>
+  <md-card-title>
+    <h3>Works</h3>
+  </md-card-title>
+  <md-card-subtitle>
+    <h2>Últimas ofertas de trabajo de Mallorca JS</h2>
+  </md-card-subtitle>
+  <md-card-content>
+    <app-work *ngFor="let item of collection | async" [item]="item"></app-work>
+  </md-card-content>
+</md-card>

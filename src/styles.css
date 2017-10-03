@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~https://fonts.googleapis.com/icon?family=Roboto';
+@import '~https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400';
+@import '~https://fonts.googleapis.com/css?family=Barrio|Nunito:300,300i,400';
+
+
+/* CUSTOM OVERWRITES */
+html, body {
+    font-family: 'Roboto';
+    font-size: 14px;
+    margin: 0px;
+    height: 100% !important;
+    width: 100%;
+}
+
+p {
+    font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito';
+}
+
+/* MATERIAL OVERWRITES */
+a:focus {
+  outline: none;
+}
+
+md-card-actions {
+    text-align: right;
+}
+
+.round-button.mat-raised-button, .round-button .mat-button-ripple {
+    border-radius: 20px;
+}
+
+.round-button.mat-raised-button {
+    margin: 5px;
+}
+
+

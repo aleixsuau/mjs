@@ -1,0 +1,37 @@
+<div *ngIf="selectedEvent">
+  <md-card>
+    <img md-card-image src="{{ selectedEvent.image }}">
+    <md-card-title>
+      {{ selectedEvent.title | uppercase }}
+    </md-card-title>
+    <md-card-subtitle>
+      {{ selectedEvent.date }} || {{ selectedEvent.time }}
+    </md-card-subtitle>
+    <md-card-content>
+      {{ selectedEvent.description }}
+    </md-card-content>
+  </md-card>
+</div>
+<div class="cards-container">
+  <div layout="row" layout-xs="column" layout-wrap>
+    <div *ngFor="let event of events | async" flex flex-xs="100">
+        <md-card *ngIf="event.id !== selectedEvent.id">
+          <img md-card-image src="{{ event.image }}">
+          <md-card-title>
+            {{ event.title | uppercase }}
+          </md-card-title>
+          <md-card-subtitle>
+            {{ event.date }} || {{ event.time }}
+          </md-card-subtitle>
+          <md-card-content>
+            {{ event.description | truncate: 100 }}
+          </md-card-content>
+          <md-card-actions>
+            <button md-raised-button routerLink="/agenda/{{ event.id }}">
+              Read
+            </button>
+          </md-card-actions>
+        </md-card>
+    </div>
+  </div>
+</div>

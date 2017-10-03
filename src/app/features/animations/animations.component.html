@@ -1,0 +1,30 @@
+<!-- <div class="circle">
+  <p>Círculo</p>
+</div> -->
+
+<button md-raised-button (click)="show = !show" color="accent">
+  {{ show ? 'HIDE' : 'SHOW' }}
+</button>
+
+<div class="sample"
+     *ngIf="show">
+</div>
+
+<!-- <div class="container"
+     *ngIf="show"
+     @enterLeave>
+
+  <div class="car"
+      *ngFor="let car of cars"
+      @enterLeave
+      [@selected]="car.selected">
+    <h4>{{ car.name | uppercase }} ({{ car.year }}) - <i>{{ car.price }}€</i></h4>
+    <button md-raised-button
+            (click)="car.selected === 'selected' ?
+                            car.selected = 'notSelected' : car.selected = 'selected'"
+            color="primary">
+      {{ car.selected === 'selected' ? 'Deselect' : 'Select' }}
+    </button>
+  </div>
+
+</div> -->

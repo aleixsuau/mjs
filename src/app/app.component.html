@@ -1,6 +1,61 @@
-<app-header></app-header>
-    <app-agenda></app-agenda>
-    <app-news></app-news>
-    <app-work></app-work>
-<app-footer></app-footer>
+<app-header (onMenuClick)="sidenav.toggle();"></app-header>
+
+<md-sidenav-container>
+  <md-sidenav #sidenav mode="push">
+      <md-nav-list>
+          <md-list-item routerLinkActive="active">
+              <md-icon>date_range</md-icon>
+              <a md-line routerLink="/agenda"
+                  routerLinkActiveOptions="{ exact: true }"
+                  (click)="sidenav.toggle();">
+                  <p>AGENDA</p>
+              </a>
+          </md-list-item>
+          <md-list-item routerLinkActive="active">
+              <md-icon>new_releases</md-icon>
+              <a md-line routerLink="/news"
+                  routerLinkActiveOptions="{ exact: true }"
+                  (click)="sidenav.toggle();">
+                  <p>NEWS</p>
+              </a>
+          </md-list-item>
+          <md-list-item routerLinkActive="active">
+              <md-icon>work</md-icon>
+              <a md-line routerLink="/works"
+                  routerLinkActiveOptions="{ exact: true }"
+                  (click)="sidenav.toggle();">
+                  <p>WORKS</p>
+              </a>
+          </md-list-item>
+          <md-list-item routerLinkActive="active">
+              <md-icon>settings</md-icon>
+              <a md-line routerLink="/admin"
+                  routerLinkActiveOptions="{ exact: true }"
+                  (click)="sidenav.toggle();">
+                  <p>ADMIN</p>
+              </a>
+          </md-list-item>
+          <md-list-item routerLinkActive="active">
+            <md-icon>settings_input_antenna</md-icon>
+            <a md-line routerLink="/animations"
+                routerLinkActiveOptions="{ exact: true }"
+                (click)="sidenav.toggle();">
+                <p>ANIMATIONS</p>
+            </a>
+        </md-list-item>
+      </md-nav-list>
+  </md-sidenav>
+
+  <div layout="column" class="container">
+      <div class="loader" *ngIf="loading | async">Loading</div>
+      <router-outlet></router-outlet>
+  </div>
+  <!--<app-footer></app-footer>-->
+</md-sidenav-container>
+
+
+
+
+
+
 

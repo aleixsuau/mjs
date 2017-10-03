@@ -1,0 +1,12 @@
+<td-expansion-panel>
+  <ng-template td-expansion-panel-label>
+    <h3><strong>{{ item.title | uppercase }}</strong></h3>
+  </ng-template>
+  <ng-template td-expansion-panel-sublabel>
+    <p><strong class="item_schedule">{{ item.date }} ({{ item.time }})</strong>
+    {{ item.description | truncate: 24}}</p>
+  </ng-template>
+  <div class="item_description">
+    <p>{{ item.description }}</p>
+  </div>      
+</td-expansion-panel>

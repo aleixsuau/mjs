@@ -3,6 +3,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
+// Firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './core/app-routing/app-routing.module';
 import { CoreModule } from './core/core.module';
@@ -10,7 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './features/home/home.module';
 import { AgendaModule } from './features/agenda/agenda.module';
 import { NewsModule } from './features/news/news.module';
-import { WorksModule } from './features/works/works.module';
+import { JobsModule } from './features/jobs/jobs.module';
 import { AdminModule } from './features/admin/admin.module';
 
 import { AppComponent } from './app.component';
@@ -41,6 +46,12 @@ import { AnimationsComponent } from './features/animations/animations.component'
       InMemoryDataService,
       { passThruUnknownUrl: true }
     ),
+    // Firebase
+    AngularFireModule.initializeApp(
+      environment.firebase, 'mallorcajs'
+    ),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     // Custom modules
     AppRoutingModule,
     SharedModule,
@@ -48,7 +59,7 @@ import { AnimationsComponent } from './features/animations/animations.component'
     HomeModule,
     AgendaModule,
     NewsModule,
-    WorksModule,
+    JobsModule,
     AdminModule
   ],
   providers: [

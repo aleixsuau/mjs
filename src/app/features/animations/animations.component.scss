@@ -6,7 +6,7 @@ La transición consiste en animar un elemento desde un estado inicial a un estad
 atravesando los estados intermedios (frames/fotogramas).
 
 Por tanto, podemos animar SOLO:
-  - Los elementos que tengan un estado inicial
+  - Los elementos que tengan un estado inicial y final
   - Las propiedades de las cuales el navegador pueda deducir los valores intermedios
     entre los 2 estados: font-size, width, left, background-color… http://oli.jp/2010/css-animatable-properties/
 
@@ -30,7 +30,7 @@ SIN TRANSITION NO HAY ANIMATION
   width: 100px;
   height: 100px;
   border-radius: 100px;
-  // transition: all 1s ease 500ms;
+  transition: all 1s ease 500ms;
   /* transition:
         all 1s ease-in,
         background-color 2s ease-in,
@@ -59,8 +59,8 @@ Las animaciones pueden consumir mucha CPU, las más 'performant' (60fps) son:
   // transform: translate(200px, 200px); // X, Y position
   // transform: translateX(-50%); // X, Y position
   // transform: rotate(180deg);
-  // transform: translate(200px, 200px) scale(2) rotate(180deg);
-  // opacity: 0.5;
+  transform: translate(200px, 200px) scale(2) rotate(180deg);
+  opacity: 0.5;
   background-color: pink;
   border: 10px solid red;
 }

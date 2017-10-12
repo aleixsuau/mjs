@@ -1,9 +1,9 @@
 <div class="editDialog">
-  <h1 md-dialog-title>Dialog</h1>
+  <h4 md-dialog-title>{{ data.section | uppercase }} EDITOR</h4>
   <div md-dialog-content>
-    <div layout="column" class="container">        
+    <div layout="column" class="container">
         <form [formGroup]="editForm">
-          <div layout="row" layout-margin>
+          <div layout="row" class="first-line" layout-margin>
             <div flex>
               <md-input-container>
                 <input mdInput
@@ -20,7 +20,7 @@
                       placeholder="Hour">
               </md-input-container>
             </div>
-          </div>      
+          </div>
           <div layout="row" layout-margin>
             <md-input-container>
               <input mdInput
@@ -47,8 +47,15 @@
               </textarea>
             </md-input-container>
           </div>
-          <!--<div formArrayName="speakers">
-            <h2>Speakers</h2>
+          <div formArrayName="speakers">
+            <p class="block">Speakers</p>
+            <button md-icon-button
+                    (click)="addSpeaker();"
+                    class="md-24"
+                    aria-label="Add order"
+                    color="accent">
+              <md-icon>add</md-icon>
+            </button>
             <div *ngFor="let speaker of speakers.controls; let i = index"
                 [formGroupName]="i"
                 layout="row" layout-margin>
@@ -62,7 +69,7 @@
                     </md-input-container>
                 </div>
                 <div flex>
-                  <md-input-container>          
+                  <md-input-container>
                     <input mdInput
                           formControlName="contact"
                           type="text"
@@ -70,27 +77,34 @@
                           placeholder="Contact">
                   </md-input-container>
                 </div>
-                <button md-mini-fab
-                        *ngIf="speakers.controls.length > 1"
-                        (click)="removeSpeaker(i)" 
-                        type="button">
-                  -
+                <button md-icon-button
+                        (click)="removeSpeaker(i)"
+                        color="primary"
+                        type="button"
+                        *ngIf="speakers.controls.length > 1">
+                        <md-icon>delete</md-icon>
                 </button>
             </div>
-          </div>-->
+          </div>
         </form>
-    </div>    
+    </div>
   </div>
   <div layout="row">
       <div md-dialog-actions>
-        <button md-button
+        <button md-raised-button
                 [md-dialog-close]="editForm.value"
-                [disabled]="editForm.invalid">
+                [disabled]="editForm.invalid"
+                color="accent">
                 <!--[md-dialog-close]="true"-->
-                  <md-icon>save</md-icon>   
+                  <md-icon>save</md-icon>
                   Salvar
         </button>
-        <button md-button md-dialog-close>Close</button>
+        <button md-raised-button
+                md-dialog-close
+                color="warn">
+                  <md-icon>close</md-icon>
+                  Close
+        </button>
       </div>
   </div>
 </div>

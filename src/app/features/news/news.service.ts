@@ -5,9 +5,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { AppConfig } from '../../app.config';
+import { AngularFireDatabase } from 'angularfire2/database';
 
-import { CustomHttpService } from './../../core/services/custom-http/custom-http.service';
 
 @Injectable()
 export class NewsService {
@@ -18,70 +17,33 @@ export class NewsService {
     private endPoint: string;
 
     constructor(
-        private customHttpService: CustomHttpService,
-        private appConfig: AppConfig,
+      private db: AngularFireDatabase,
     ) {
-        this.endPoint = `${this.appConfig.api}news/`;
+        this.endPoint = `news`;
         this.read();
     }
 
     create(item: IEvent) {
-        console.log('create Item:', item);
-        this.customHttpService
-                .post(`${this.endPoint}`, item)
-                .subscribe(
-                    (response) => {
-                        this.store.push(response.json().data);
-                        this._collection.next(this.store);
-                        console.log('pushed item: ', response);
-                    },
-                    this.handleError
-                );
+      const id = this.db.list(this.endPoint).push(null).key;
+      item.id = id;
+      this.db.list(this.endPoint).set(id, item);
     }
 
     read() {
-        this.customHttpService
-                .get(`${this.endPoint}`)
-                .subscribe(
-                    (response: Response) => {
-                        this.store = Object.assign([], response.json().data);
-                        this._collection.next(this.store);
-                    },
-                    this.handleError
-                );
+      this.db.list(this.endPoint)
+                .valueChanges()
+                .subscribe((response) => {
+                  this.store = response as IEvent[];
+                  this._collection.next(this.store);
+                });
     }
 
     update(item) {
-        this.customHttpService
-                .put(`${this.endPoint}/${item.id}`, item)
-                .subscribe(
-                    (response: Response) => {
-                        this.store.forEach((storedItem, i) => {
-                            if (item.id === storedItem.id) {
-                                this.store[i] = item;
-                            }
-                        });
-                        this._collection.next(this.store);
-                    },
-                    this.handleError
-                );
+      this.db.object(`${this.endPoint}/${item.id}`).update(item);
     }
 
     delete(item) {
-        const id = typeof item === 'object' ? item.id : item;
-        this.customHttpService
-                .delete(`${this.endPoint}/${id}`)
-                .subscribe(
-                    (response: Response) => {
-                        this.store.forEach((storedItem, i) => {
-                            if (item.id === storedItem.id) {
-                                this.store.splice(i, 1);
-                            }
-                        });
-                        this._collection.next(this.store);
-                    },
-                    this.handleError
-                );
+      this.db.object(`${this.endPoint}/${item.id}`).remove();
     }
 
     private handleError (error: Response | any) {

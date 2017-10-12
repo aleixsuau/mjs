@@ -6,25 +6,28 @@
   {{ show ? 'HIDE' : 'SHOW' }}
 </button>
 
-<div class="sample"
+<!-- <div class="sample"
+     @enterLeave
      *ngIf="show">
-</div>
+</div> -->
 
-<!-- <div class="container"
+<div class="container"
      *ngIf="show"
      @enterLeave>
 
   <div class="car"
-      *ngFor="let car of cars"
-      @enterLeave
-      [@selected]="car.selected">
+       *ngFor="let car of cars"
+       @enterLeave
+       [@selected]="car.selected"
+       (@selected.done)="logIt($event)">
     <h4>{{ car.name | uppercase }} ({{ car.year }}) - <i>{{ car.price }}€</i></h4>
     <button md-raised-button
             (click)="car.selected === 'selected' ?
-                            car.selected = 'notSelected' : car.selected = 'selected'"
+                            car.selected = 'notSelected' :
+                            car.selected = 'selected'"
             color="primary">
       {{ car.selected === 'selected' ? 'Deselect' : 'Select' }}
     </button>
   </div>
 
-</div> -->
+</div>

@@ -2,7 +2,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class InMemoryDataService implements InMemoryDbService {
   agenda: IEvent[] = [];
-  works: IWork[] = [];
+  works: IJob[] = [];
   news: INew[] = [];
 
   constructor() {

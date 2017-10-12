@@ -1,6 +1,14 @@
 // ANIMACIONES EN JS
+// https://github.com/aleixsuau/mjs
 /*
 INSTALACIÓN:
+- PACKAGE.json
+{
+  "dependencies": {
+    "@angular/animations": "latest",
+    "@angular/platform-browser": "latest",
+  }
+}
 - En el MÓDULO (app.module.ts):
   import { BrowserModule } from '@angular/platform-browser';
   import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,7 +35,7 @@ estados (finished...), testear y debuggar con JS. Las animaciones pasan del CSS 
 
       // Creating animations from script
       let elem = document.getElementsByClassName('circle')[0];
-      elem.animate({ transform: 'scale(0)', opacity: 0 }, 300);
+      elem.animate({ transform: 'scale(0)', opacity: 0 }, 3000);
 
       // Inspecting running animations
       const isAnimating = elem.getAnimations().some(
@@ -76,23 +84,87 @@ import { trigger, state, style, animate, transition, group } from '@angular/anim
   styleUrls: ['./animations.component.scss'],
   // Array de animaciones
   animations: [
+    // DEFAULT STATES
     trigger('enterLeave', [
-      // EJERCICIO:
-      // Implementa laS trasiciones declarando los states de transición (origen => destino)
-      // y haciendo uso de style() y animate()
       // TRANSICIÓN DE ENTRADA
-      transition('', [
-
+      transition('void => *', [ // '* <=> void'
+        // ORÍGEN: Aplica un style de inicio al elemento
+        style({
+          opacity: 0.2,
+          transform: 'translateX(-100%)' // scale(0.1) rotate(90deg)
+        }),
+        animate('1500ms ease-in',
+          // DESTINO: Aplica un style de destino, el elemento se muestra,
+          // realiza la transición hacia el style de destino y vuelve a su style inicial
+          /* style({
+            opacity: 1,
+            transform: 'scale(1.2)'
+          }) */
+        )
       ]),
-      // TRANSICIÓN DE SALIDA
-      transition('', [
+      // Los styles aplicados en las transitions se eliminan
+      // una vez finalizada la transición entre states
 
-      ])
+      // TRANSICIÓN DE SALIDA
+      /* transition('* => void', [
+        animate('1000ms ease-in-out',
+          style({
+            opacity: 0.2,
+            transform: 'translateX(100%)'
+          })
+        )
+      ]) */
+
+      // GROUPED ANIMATIONS
+      // Nos permite realizar animaciones en paralelo
+      /* transition('* => void', [
+        group([
+          animate('1s ease',
+            style({
+              backgroundColor: '#ffc107'
+            })
+          ),
+          animate('2s 1.5s ease',
+            style({
+              opacity: 0.2,
+              transform: 'translateX(100%)'
+            })
+          ),
+        ])
+      ]) */
+
+      /* // QUERY & STAGGER
+      transition('* => *', [
+        // this hides everything right away
+        query(':enter', style({ opacity: 0 })),
+
+        // starts to animate things with a stagger in between
+        query(':enter', stagger('100ms', [
+          animate('1s', style({ opacity: 1 }))
+        ])
+      ]) */
     ]),
 
     // CUSTOM STATES
     // FINAL: Aplica un style final al elemento, una vez que el elemento ya ha
     // realizado la transición al estado
+    trigger('selected', [
+      state('selected',
+        style({
+          backgroundColor: 'whitesmoke',
+          transform: 'scale(1.2)',
+        })
+      ),
+      state('notSelected',
+        style({
+          transform: 'scale(1)',
+        })
+      ),
+      transition('selected <=> notSelected', [
+        animate('300ms ease-in')
+      ])
+    ])
+    // ANIMATION CALLBACKS
   ]
 })
 export class AnimationsComponent implements OnInit {
@@ -110,6 +182,10 @@ export class AnimationsComponent implements OnInit {
     ];
   }
 
+  logIt(event) {
+    console.log('Animation done, $event: ', event);
+  }
+
 }
 
 interface ICar {
@@ -118,4 +194,36 @@ interface ICar {
   year: number;
   selected: string;
 }
+
+/*
+AVANZADO (>=4.2)
+animation(), query(), stagger(), AnimationBuilder, Router animations, inputs/params.
+ANIMATION:
+
+
+
+PARÁMETROS:
+Podemos declarar parámetros a la animación en:
+- En la CLASE:
+  @Component({
+    animations: [
+      trigger('someCoolAnimation', [
+        transition('* => *', [ animation desc ], { params: '', ...animation options })
+      ])...
+
+- En la PLANTILLA:
+    <div [@animation]="{value: expVal, option1: value, option2: value... }">...</div>
+
+Luego podemos usar los parámetros en la declaración de la animación:
+  transition('* => *', [
+    style({ opacity: 0 }),
+    animate("{{ time }}",
+      style({ opacity: "{{ opacity }}" }),
+  ], {
+    time: "1s",
+    opacity: "1"
+  })
+
+*/
+
 

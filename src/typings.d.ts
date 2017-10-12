@@ -22,7 +22,7 @@ interface INew {
     image: string;
 }
 
-interface IWork {
+interface IJob {
     id: string;
     title: string;
     description: string;

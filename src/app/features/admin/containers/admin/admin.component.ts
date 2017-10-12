@@ -8,7 +8,7 @@ import { EditDialogComponent } from './../../components/edit-dialog/edit-dialog.
 import { DialogComponent } from './../../../../shared/components/dialog/dialog.component';
 
 import { NewsService } from './../../../news/news.service';
-import { WorksService } from './../../../works/works.service';
+import { JobsService } from './../../../jobs/jobs.service';
 import { EventsService } from './../../../agenda/services/events.service';
 
 @Component({
@@ -20,20 +20,15 @@ export class AdminComponent implements OnInit {
   formSection = 'events';
   events: Observable<IEvent[]>;
   news: Observable<INew[]>;
-  works: Observable<IWork[]>;
-  eventsTableColumns = [{ name: 'id', label: 'ID' }, { name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
-  newsTableColumns = [{ name: 'id', label: 'ID' }, { name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
-  worksTableColumns = [{ name: 'id', label: 'ID' }, { name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
-
-  adminForm: FormGroup;
-  get speakers(): FormArray {
-    return this.adminForm.get('speakers') as FormArray;
-  }
+  jobs: Observable<IJob[]>;
+  eventsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
+  newsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
+  jobsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
 
   constructor(
     private eventsService: EventsService,
     private newsService: NewsService,
-    private worksService: WorksService,
+    private jobsService: JobsService,
     private formBuilder: FormBuilder,
     public dialog: MdDialog,
   ) { }
@@ -41,47 +36,21 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.events = this.eventsService.collection;
     this.news = this.newsService.collection;
-    this.works = this.worksService.collection;
+    this.jobs = this.jobsService.collection;
 
 
     const today = `${new Date().getFullYear()}` +
                   `-${new Date().getMonth() < 10 ? `0${new Date().getMonth()}` : new Date().getMonth()}` +
                   `-${new Date().getDate()}`;
-
-    this.adminForm = this.formBuilder
-                            .group({
-                                title: ['', Validators.required, Validators.minLength(5)],
-                                description: ['', Validators.required, Validators.minLength(40)],
-                                date: [today, Validators.required],
-                                time: [`${new Date().getHours()}:${new Date().getMinutes()}`, Validators.required],
-                                speakers: this.formBuilder.array([
-                                  this.formBuilder.group({
-                                    name: ['', Validators.required],
-                                    contact: ['', Validators.required]
-                                  })
-                                ])
-                            });
-  }
-
-  onSubmit() {
-    console.log('Form value: ', this.adminForm.value);
-  }
-
-  logStatus() {
-    console.log(this.adminForm, this.adminForm.value, this.adminForm.status);
-  }
-
-  addSpeaker() {
-    this.speakers.push(this.formBuilder.group({ name: '', contact: ''}));
-  }
-
-  removeSpeaker(index) {
-    this.speakers.removeAt(index);
   }
 
   openEditDialog(item, section) {
-    console.log('item, text: ', item, section);
-    const EditDialogRef = this.dialog.open(EditDialogComponent, {data: item});
+    const data = {
+      item,
+      section
+    };
+    console.log('data: ', data);
+    const EditDialogRef = this.dialog.open(EditDialogComponent, { data });
     EditDialogRef
         .afterClosed()
         .subscribe(editedItem => {

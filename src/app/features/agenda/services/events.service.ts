@@ -6,7 +6,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { AppConfig } from '../../../app.config';
+import { AngularFireDatabase } from 'angularfire2/database';
+
+import { environment } from './../../../../environments/environment.prod';
 
 
 @Injectable()
@@ -18,81 +20,38 @@ export class EventsService {
     private endPoint: string;
 
     constructor(
-        private customHttpService: CustomHttpService,
-        private appConfig: AppConfig,
+      private db: AngularFireDatabase,
     ) {
-        this.endPoint = `${this.appConfig.api}agenda/`;
+        this.endPoint = `events`;
         this.read();
     }
 
     create(item: IEvent) {
-        console.log('create Item:', item);
-        this.customHttpService
-                .post(`${this.endPoint}`, item)
-                .subscribe(
-                    (response) => {
-                        this.store.push(response.json().data);
-                        this._collection.next(this.store);
-                        console.log('pushed item: ', response.json().data);
-                    },
-                    this.handleError
-                );
+        const id = this.db.list(this.endPoint).push(null).key;
+        item.id = id;
+        this.db.list(this.endPoint).set(id, item);
     }
 
     read() {
-        this.customHttpService
-                .get(`${this.endPoint}`)
-                .subscribe(
-                    (response: Response) => {
-                        this.store = Object.assign([], response.json().data);
-                        this._collection.next(this.store);
-                    },
-                    this.handleError
-                );
+      this.db.list(this.endPoint)
+                .valueChanges()
+                .subscribe((response) => {
+                  this.store = response as IEvent[];
+                  this._collection.next(this.store);
+                });
     }
 
     readOne(id: string) {
-        // TODO: Adapt the query parameter to the final API
-        return this.customHttpService
-                     .get(`${this.endPoint}?id=${id}`)
-                     .map((response: Response) => {
-                         console.log('readOne data: ', response.json().data[0]);
-                         return response.json().data[0];
-                     });
+      return this.db.object(`${this.endPoint}/${id}`)
+                      .valueChanges();
     }
 
     update(item) {
-        this.customHttpService
-                .put(`${this.endPoint}${item.id}`, item)
-                .subscribe(
-                    (response: Response) => {
-                        this.store.forEach((storedItem, i) => {
-                            if (item.id === storedItem.id) {
-                                this.store[i] = item;
-                                console.log('macth: ', item, this.store);
-                            }
-                        });
-                        this._collection.next(this.store);
-                    },
-                    this.handleError
-                );
+      this.db.object(`${this.endPoint}/${item.id}`).update(item);
     }
 
     delete(item) {
-        const id = typeof item === 'object' ? item.id : item;
-        this.customHttpService
-                .delete(`${this.endPoint}${id}`)
-                .subscribe(
-                    (response: Response) => {
-                        this.store.forEach((storedItem, i) => {
-                            if (item.id === storedItem.id) {
-                                this.store.splice(i, 1);
-                            }
-                        });
-                        this._collection.next(this.store);
-                    },
-                    this.handleError
-                );
+        this.db.object(`${this.endPoint}/${item.id}`).remove();
     }
 
     private handleError (error: Response | any) {

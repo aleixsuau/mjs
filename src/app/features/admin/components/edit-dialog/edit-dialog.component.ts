@@ -17,6 +17,10 @@ export class EditDialogComponent implements OnInit {
   tags: string[] = [];
   filteredTags: Observable<string[]>; // = ['horror', 'love', 'glam', 'ohmygod'];
 
+  get speakers() {
+    return this.editForm.controls.speakers as FormArray;
+  }
+
   constructor(
     // public dialogRef: MdDialogRef<any>
     private formBuilder: FormBuilder,
@@ -24,26 +28,33 @@ export class EditDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('this.data: ', this.data);
+    console.log('this.data.item: ', this.data.item);
+    if (!this.data) { return; };
     this.editForm = this.formBuilder
                             .group({
-                                title: [ this.data && this.data.title || '', [Validators.required, Validators.minLength(5)]],
-                                description: [ this.data && this.data.description || '', [Validators.required, Validators.minLength(40)]],
-                                date: [ this.data && this.data.date || '', Validators.required],
-                                time: [ this.data && this.data.time || '', Validators.required],
-                                image: [ this.data && this.data.image || '', Validators.required],
-                                /*speakers: this.formBuilder.array([
-                                  this.formBuilder.group({
-                                    name: ['', Validators.required],
-                                    contact: ['', Validators.required]
-                                  })
-                                ])*/
+                                title: [ this.data.item && this.data.item.title || '', [Validators.required, Validators.minLength(5)]],
+                                description: [ this.data.item && this.data.item.description || '', [Validators.required, Validators.minLength(40)]],
+                                date: [ this.data.item && this.data.item.date || '', Validators.required],
+                                time: [ this.data.item && this.data.item.time || '', Validators.required],
+                                image: [ this.data.item && this.data.item.image || '', Validators.required],
+                                speakers: this.formBuilder.array([
+                                  this.formBuilder.group({ name: '', contact: ''})
+                                ])
                             });
-    console.log('this.editForm: ', this.editForm);
   }
 
   onInputChange(query) {
     console.log('inputChange: ', query);
+  }
+
+  addSpeaker() {
+    console.log('Add Speaker');
+    this.speakers.push(this.formBuilder.group({ name: '', contact: ''}));
+  }
+
+  removeSpeaker(index) {
+    console.log('Remove Speaker');
+    this.speakers.removeAt(index);
   }
 
 }

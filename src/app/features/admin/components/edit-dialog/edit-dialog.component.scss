@@ -3,6 +3,25 @@
     max-width: 100%;
 }
 
+.first-line {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.block {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .mat-input-container {
     width: 100%;
+}
+
+.mat-raised-button {
+  margin-right: 15px;
+}
+
+.mat-icon-button .mat-icon, .mat-icon-button i {
+  line-height: 20px;
 }

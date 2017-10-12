@@ -6,7 +6,7 @@ import { HomeComponent } from './../../features/home/containers/home/home.compon
 import { AgendaPreviewComponent } from './../../features/agenda/containers/agenda-preview/agenda-preview.component';
 import { AgendaComponent } from './../../features/agenda/containers/agenda/agenda.component';
 import { NewsPreviewComponent } from './../../features/news/containers/news-preview/news-preview.component';
-import { WorksPreviewComponent } from './../../features/works/containers/works-preview/works-preview.component';
+import { JobsPreviewComponent } from './../../features/jobs/containers/jobs-preview/jobs-preview.component';
 import { AdminComponent } from './../../features/admin/containers/admin/admin.component';
 import { AnimationsComponent } from './../../features/animations/animations.component';
 
@@ -23,7 +23,7 @@ const routes: Routes = [
     }
   },
   { path: 'agenda', component: AgendaPreviewComponent },
-  { path: 'works', component: WorksPreviewComponent },
+  { path: 'jobs', component: JobsPreviewComponent },
   { path: 'news', component: NewsPreviewComponent },
   { path: 'admin', component: AdminComponent },
   { path: '', component: HomeComponent, pathMatch: 'full' },

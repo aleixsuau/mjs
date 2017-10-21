@@ -1,11 +1,15 @@
-<div *ngIf="selectedEvent">
+<div *ngIf="selectedEvent" [@selected]="selectedEvent.id">
   <md-card>
-    <img md-card-image src="{{ selectedEvent.image }}">
+    <div [ngStyle]="{ 'background-image': 'url(' + selectedEvent?.image?.url + ')',
+                      'background-size': 'cover',
+                      'background-repeat': 'no-repeat',
+                      'background-position': 'center center' }"
+                      class="event-image"></div>
     <md-card-title>
-      {{ selectedEvent.title | uppercase }}
+      {{ selectedEvent?.title | uppercase }}
     </md-card-title>
     <md-card-subtitle>
-      {{ selectedEvent.date }} || {{ selectedEvent.time }}
+     {{ selectedEvent?.date | date:'EE, d/MM/y' }},  {{ selectedEvent?.time }}h
     </md-card-subtitle>
     <md-card-content>
       {{ selectedEvent.description }}
@@ -13,21 +17,30 @@
   </md-card>
 </div>
 <div class="cards-container">
-  <div layout="row" layout-xs="column" layout-wrap>
-    <div *ngFor="let event of events | async" flex flex-xs="100">
-        <md-card *ngIf="event.id !== selectedEvent.id">
-          <img md-card-image src="{{ event.image }}">
+  <div fxLayoutWrap>
+    <div *ngFor="let event of events | async"
+         @EnterLeave
+         fxFlex.xs="100"
+         fxFlex.sm="50"
+         fxFlex.md="30"
+         fxFlex.gt-md="20">
+        <md-card>
+          <div [ngStyle]="{ 'background-image': 'url(' + event?.image?.url + ')',
+                            'background-size': 'cover',
+                            'background-repeat': 'no-repeat',
+                            'background-position': 'center center' }"
+                class="event-image"></div>
           <md-card-title>
-            {{ event.title | uppercase }}
+            {{ event?.title | uppercase }}
           </md-card-title>
           <md-card-subtitle>
-            {{ event.date }} || {{ event.time }}
+            {{ event?.date | date:'EE, d/MM/y' }},  {{ event?.time }}h
           </md-card-subtitle>
           <md-card-content>
-            {{ event.description | truncate: 100 }}
+            {{ event?.description | truncate: 100 }}
           </md-card-content>
           <md-card-actions>
-            <button md-raised-button routerLink="/agenda/{{ event.id }}">
+            <button md-raised-button routerLink="/agenda/{{ event?.id }}">
               Read
             </button>
           </md-card-actions>

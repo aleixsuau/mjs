@@ -3,13 +3,42 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+import {trigger,
+        animate,
+        style,
+        group,
+        animateChild,
+        query,
+        stagger,
+        transition} from '@angular/animations';
+
+
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
-  styleUrls: ['./agenda.component.css']
+  styleUrls: ['./agenda.component.scss'],
+  animations: [
+    trigger('EnterLeave', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(40px)'}),
+        animate('500ms ease-in')
+      ])
+    ]),
+    trigger('selected', [
+      transition('* <=> *', [
+        style({ opacity: 0, transform: 'translateX(-400px)'}),
+        animate('500ms ease-in', style({ opacity: 1, transform: 'translateX(40px)'})),
+        /* group([
+          animate('500ms ease-in', style({ opacity: 1, transform: 'translateX(-400px)'})),
+          animate('500ms 500ms ease-in', style({ opacity: 1, transform: 'translateX(400px)'})),
+          animate('500ms 1000ms ease-in', style({ transform: 'translateX(0px)'}))
+        ]) */
+      ])
+    ])
+  ],
 })
 export class AgendaComponent implements OnInit {
-  selectedEvent: Event;
+  selectedEvent: IEvent;
   events: Observable<IEvent[]>;
 
   constructor(
@@ -18,12 +47,21 @@ export class AgendaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.data
-          .pluck('event')
-          .subscribe((response: Event) => {
-            this.selectedEvent = response;
-          });
-    this.events = this.eventsService.collection;
+    if (this.route.data) {
+      this.route
+            .data
+            .pluck('event')
+            .subscribe((response: IEvent) => {
+                          this.selectedEvent = response;
+                          this.filterCollection();
+                        });
+    }
+  }
+
+  filterCollection() {
+    this.events = this.eventsService
+                          .collection
+                          .map(events => events.filter(event => this.selectedEvent ? event.id !== this.selectedEvent.id : true));
   }
 
 }

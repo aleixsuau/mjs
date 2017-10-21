@@ -26,3 +26,8 @@ md-sidenav-container {
     left: 50%;
     background-color: aqua;
 }
+
+.login-buttons {
+  position: absolute;
+  right: 15px;
+}

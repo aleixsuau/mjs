@@ -1,7 +1,8 @@
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Material
 import { MaterialModule } from '@angular/material';
@@ -12,35 +13,59 @@ import { CovalentLayoutModule } from '@covalent/core';
 import { CovalentCommonModule } from '@covalent/core';
 import { CovalentExpansionPanelModule } from '@covalent/core';
 
+// Flex
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 // Components
 import { DialogComponent } from './components/dialog/dialog.component';
+
+// Services
+import { UploadService } from './services/upload/upload.service';
+import { UppercaserPipe } from './pipes/uppercaser/uppercaser.pipe';
+import { FilterPipe } from './pipes/filter/filter.pipe';
+import { InputFileComponent } from './components/input-file/input-file.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     // Material
     MaterialModule,
     BrowserAnimationsModule,
     // Covalent
     CovalentLayoutModule,
     CovalentCommonModule,
-    CovalentExpansionPanelModule
+    CovalentExpansionPanelModule,
+    // Flex
+    FlexLayoutModule,
   ],
   declarations: [
-    DialogComponent
+    DialogComponent,
+    InputFileComponent,
+    // TODO: remove this
+    UppercaserPipe,
+    FilterPipe,
+  ],
+  providers: [
+    UploadService
   ],
   exports: [
     CommonModule,
-    FormsModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
     CovalentLayoutModule,
     CovalentCommonModule,
     CovalentExpansionPanelModule,
-    DialogComponent
+    FlexLayoutModule,
+    DialogComponent,
+    InputFileComponent,
+    UppercaserPipe,
+    FilterPipe,
   ]
 })
 export class SharedModule { }

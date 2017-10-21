@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { CovalentDataTableModule } from '@covalent/core';
 
 import { SharedModule } from './../../shared/shared.module';
@@ -12,7 +10,6 @@ import { DialogComponent } from './../../shared/components/dialog/dialog.compone
 
 @NgModule({
   imports: [
-    ReactiveFormsModule,
     SharedModule,
     CovalentDataTableModule
   ],

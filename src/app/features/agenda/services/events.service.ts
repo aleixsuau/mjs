@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -41,9 +42,8 @@ export class EventsService {
                 });
     }
 
-    readOne(id: string) {
-      return this.db.object(`${this.endPoint}/${id}`)
-                      .valueChanges();
+    readOne(id: string): Observable<IEvent> {
+      return this.db.object(`${this.endPoint}/${id}`).valueChanges();
     }
 
     update(item) {

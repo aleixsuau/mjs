@@ -1,0 +1,33 @@
+<div class="file-input-container"
+     *ngIf="!file">
+    <label for="file-input"
+            class="file-input">
+      <md-icon class="md-12"
+                aria-label="delete"
+                color="primary">
+                add_a_photo
+      </md-icon>
+      <p>Choose file</p>
+    </label>
+    <input id="file-input"
+           type="file"
+           (change)="onModelChange($event.target.files[0])"
+           (blur)="onTouch()"
+           placeholder="file">
+</div>
+<div class="upload" #uploadBar>
+    <div *ngIf="file">
+      <div [ngStyle]="{ 'background-image': 'url(' + file?.url + ')',
+                        'background-size': 'cover',
+                        'background-repeat': 'no-repeat',
+                        'background-position': 'center center' }"
+            class="upload-file">
+      </div>
+      <p><strong>{{ file?.name | uppercase }}</strong> ({{ file?.size / 1000 }}kb)</p>
+      <button md-icon-button
+              (click)="removeFile();"
+              color="primary">
+        <md-icon class="md-24" aria-label="delete">delete</md-icon>
+      </button>
+    </div>
+</div>

@@ -9,3 +9,33 @@ md-icon {
     padding-right: 15px;
     cursor: pointer;
 }
+
+.login-section {
+  position: absolute;
+  height: 64px;
+  right: 15px;
+}
+
+.login-button {
+  margin-top: 14px;
+  height: 64px;
+}
+
+.user-data {
+  display: inline-block;
+}
+
+.profile-image {
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin-top: 11px;
+  margin-right: 12px;
+  border-radius: 50%;
+  border: 2px solid #c89604;
+}
+
+.username {
+  float: left;
+  height: 64px;
+}

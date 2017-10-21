@@ -1,3 +1,11 @@
-<p>
-  footer works!
-</p>
+<div class="footerText">
+  <p *ngIf="!hideTextBase">
+    {{footerText}}
+  </p>
+  <button md-raised-button
+          id="button"
+          color="primary"
+          (click)="hideTextBase = !hideTextBase">
+          {{ hideTextBase ? 'Show' : 'Hide' }}
+  </button>
+</div>

@@ -11,6 +11,6 @@ export const environment = {
     databaseURL: 'https://mallorcajswecan.firebaseio.com',
     projectId: 'mallorcajswecan',
     storageBucket: 'mallorcajswecan.appspot.com',
-    messagingSenderId: '479811353786'
+    messagingSenderId: '479811353786',
   }
 };

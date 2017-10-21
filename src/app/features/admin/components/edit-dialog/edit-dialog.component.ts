@@ -1,9 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import {MD_DIALOG_DATA} from '@angular/material';
-// import { MdDialogRef } from '@angular/material';
+import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+
+import { Upload } from './../../../../shared/services/upload/upload';
+import { UploadService } from './../../../../shared/services/upload/upload.service';
+import { ImageResizerService } from './../../../../core/services/image-resizer/image-resizer.service';
 
 
 @Component({
@@ -11,50 +14,113 @@ import {MD_DIALOG_DATA} from '@angular/material';
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.scss']
 })
-export class EditDialogComponent implements OnInit {
+export class EditDialogComponent implements OnInit, OnDestroy {
 
   editForm: FormGroup;
-  tags: string[] = [];
-  filteredTags: Observable<string[]>; // = ['horror', 'love', 'glam', 'ohmygod'];
+  image: IImage;
+  // When editing an existing image, save a copy in case the user
+  // Deletes the image anc close the dialog without saving changes
+  imageBackup: IImage;
+  uploadPercentage: number;
+  uploading: boolean;
 
   get speakers() {
     return this.editForm.controls.speakers as FormArray;
   }
 
   constructor(
-    // public dialogRef: MdDialogRef<any>
     private formBuilder: FormBuilder,
+    private uploadService: UploadService,
+    private imageResizerService: ImageResizerService,
+    private dialog: MdDialogRef<EditDialogComponent>,
     @Inject(MD_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
-    console.log('this.data.item: ', this.data.item);
     if (!this.data) { return; };
     this.editForm = this.formBuilder
                             .group({
                                 title: [ this.data.item && this.data.item.title || '', [Validators.required, Validators.minLength(5)]],
-                                description: [ this.data.item && this.data.item.description || '', [Validators.required, Validators.minLength(40)]],
+                                description: [ this.data.item && this.data.item.description || '', [Validators.required, Validators.minLength(5)]],
                                 date: [ this.data.item && this.data.item.date || '', Validators.required],
                                 time: [ this.data.item && this.data.item.time || '', Validators.required],
-                                image: [ this.data.item && this.data.item.image || '', Validators.required],
-                                speakers: this.formBuilder.array([
-                                  this.formBuilder.group({ name: '', contact: ''})
-                                ])
+                                image: [ this.data.item && this.data.item.image  || '', Validators.required],
+                                speakers: this.formBuilder.array([], Validators.required),
                             });
+
+    // If the dialog is editing an existing item (comes with data)
+    if (this.data.item) {
+      // Set the image for the view
+      this.image = this.data.item.image;
+      this.imageBackup = {...this.data.item.image};
+      this.data.item.speakers
+                      .forEach(speaker => {
+                        this.speakers.push(this.formBuilder.group(speaker));
+                      });
+    } else {
+      this.addSpeaker();
+    }
   }
 
-  onInputChange(query) {
-    console.log('inputChange: ', query);
+  ngOnDestroy() {
+    console.log('OnDestroy');
   }
 
   addSpeaker() {
-    console.log('Add Speaker');
     this.speakers.push(this.formBuilder.group({ name: '', contact: ''}));
   }
 
   removeSpeaker(index) {
-    console.log('Remove Speaker');
     this.speakers.removeAt(index);
+  }
+
+  processDialogResult(formValue) {
+    // If it's a new event or the user has deleted the image
+    // the image is a new file, so upload it.
+    if (!this.image) {
+      this.imageResizerService
+                .resize(formValue.image, { width: 800, height: 100 })
+                .filter(resizedImage => resizedImage != null)
+                .switchMap((resizedImage) => {
+                  this.uploading = true;
+                  return this.uploadFile(resizedImage);
+                })
+                .subscribe((uploadedImage) => {
+                  const formResult = {
+                    ...formValue,
+                    image: {
+                      title: uploadedImage.name,
+                      url: uploadedImage.url,
+                      size: uploadedImage.file.size
+                    }
+                  };
+                  if (this.imageBackup && this.imageBackup.title !== formResult.image.title) {
+                    this.uploadService.deleteUpload(this.data.section, this.imageBackup.title);
+                  }
+                  this.uploading = false;
+                  this.dialog.close(formResult);
+                });
+    } else {
+      this.dialog.close(formValue);
+    }
+  }
+
+  uploadFile(file) {
+    if (!file) { return; };
+    // Set upload % for the md-progress-bar
+    this.uploadService
+            .progress
+            .subscribe((progress) => {
+              this.uploadPercentage = progress;
+            });
+
+    return this.uploadService
+                  .pushUpload(this.data.section, file);
+  }
+
+  deleteFile() {
+    this.image = null;
+    this.editForm.controls.image.setValue('');
   }
 
 }

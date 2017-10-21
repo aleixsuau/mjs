@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './containers/home/home.component';
@@ -9,6 +10,7 @@ import { AgendaModule } from './../agenda/agenda.module';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     AgendaModule,
     JobsModule,
     NewsModule

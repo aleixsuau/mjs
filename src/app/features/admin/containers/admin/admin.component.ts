@@ -49,17 +49,16 @@ export class AdminComponent implements OnInit {
       item,
       section
     };
-    console.log('data: ', data);
     const EditDialogRef = this.dialog.open(EditDialogComponent, { data });
     EditDialogRef
         .afterClosed()
         .subscribe(editedItem => {
           const service = `${section}Service`;
+          console.log('editedItem: ', editedItem);
 
           if (item && editedItem) {
             const itemToSave = {...item, ...editedItem};
             this[service].update(itemToSave);
-            console.log('Dialog: ', itemToSave);
           } else if (editedItem) {
             const itemToSave = {...editedItem};
             this[service].create(itemToSave);

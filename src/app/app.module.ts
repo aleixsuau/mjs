@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 // Firebase
+import { AuthMethods, AuthProvider, FirebaseUIAuthConfig, FirebaseUIModule, AuthProviderWithCustomConfig } from 'firebaseui-angular';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -31,6 +32,20 @@ import { InMemoryDataService } from './shared/services/in-memory-data.service';
 import { AdminComponent } from './features/admin/containers/admin/admin.component';
 import { AnimationsComponent } from './features/animations/animations.component';
 
+// Firebase Auth Config
+const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
+  providers: [
+    AuthProvider.Google,
+    /* facebookCustomConfig,
+    AuthProvider.Twitter, */
+    AuthProvider.Github,
+    AuthProvider.Password,
+    /* AuthProvider.Phone */
+  ],
+  method: AuthMethods.Redirect,
+  tos: '<your-tos-link>' // Terms & Conditions Link
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,9 +63,11 @@ import { AnimationsComponent } from './features/animations/animations.component'
     ),
     // Firebase
     AngularFireModule.initializeApp(
-      environment.firebase, 'mallorcajs'
+      environment.firebase,
     ),
     AngularFireAuthModule,
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     AngularFireDatabaseModule,
     // Custom modules
     AppRoutingModule,

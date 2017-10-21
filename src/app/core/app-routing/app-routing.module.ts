@@ -22,7 +22,7 @@ const routes: Routes = [
         event: AgendaResolverService
     }
   },
-  { path: 'agenda', component: AgendaPreviewComponent },
+  { path: 'agenda', component: AgendaComponent },
   { path: 'jobs', component: JobsPreviewComponent },
   { path: 'news', component: NewsPreviewComponent },
   { path: 'admin', component: AdminComponent },

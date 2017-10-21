@@ -34,19 +34,19 @@
     </th>
     <tr td-data-table-row *ngFor="let event of events | async">
       <td td-data-table-cell>
-        {{ event.title }}
+        {{ event?.title }}
       </td>
       <td td-data-table-cell>
-        {{ event.description | truncate: 30 }}
+        {{ event?.description | truncate: 30 }}
       </td>
       <td td-data-table-cell>
-        {{ event.date | date:'fullDate'}}
+        {{ event?.date | date:'fullDate'}}
       </td>
       <td td-data-table-cell>
-        {{ event.time }}
+        {{ event?.time }}
       </td>
       <td td-data-table-cell>
-        {{ event.image  | truncate: 30 }}
+        {{ event?.image?.title  | truncate: 30 }}
       </td>
       <td td-data-table-cell (click)="openEditDialog(event, formSection)">
         <button md-icon-button color="primary">

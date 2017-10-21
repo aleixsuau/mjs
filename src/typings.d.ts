@@ -10,7 +10,11 @@ interface IEvent {
     description: string;
     date: string;
     time: string;
-    image: string;
+    image: {
+      title: string;
+      url: string;
+      size: number;
+    };
 }
 
 interface INew {
@@ -19,7 +23,11 @@ interface INew {
     description: string;
     date: string;
     time: string;
-    image: string;
+    image: {
+      title: string;
+      url: string;
+      size: number;
+    };
 }
 
 interface IJob {
@@ -28,5 +36,23 @@ interface IJob {
     description: string;
     date: string;
     time: string;
-    image: string;
+    image: {
+      title: string;
+      url: string;
+      size: number;
+    };
+}
+
+interface IUser {
+  displayName: string;
+  email: string;
+  photoURL: string;
+  emailVerified: boolean;
+  uid: string;
+}
+
+interface IImage {
+  title: string;
+  url: string;
+  size: number;
 }

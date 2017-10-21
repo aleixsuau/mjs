@@ -6,4 +6,22 @@
         MALLORCA JS
     </h2>
   </a>
+  <div class="login-section"
+       (mouseenter)="showLogin = true"
+       (mouseleave)="showLogin = false">
+    <div class="login-button"
+         *ngIf="!($user | async)?.displayName">
+         <p>LogIn</p>
+    </div>
+    <div class="user-data"
+        *ngIf="($user | async)?.displayName">
+        <div [ngStyle]="{ 'background-image': 'url(' + ($user | async).photoURL + ')', 'background-size': 'cover'}"
+             class="profile-image">
+        </div>
+        <div class="username">
+          <p>{{ ($user | async)?.displayName | truncate: 10}}</p>
+        </div>
+    </div>
+    <app-login-menu [show]="showLogin" (logged)="showLogin = false"></app-login-menu>
+  </div>
 </md-toolbar>

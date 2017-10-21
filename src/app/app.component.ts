@@ -1,9 +1,8 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 
+// Firebase
 import { AngularFireDatabase } from 'angularfire2/database';
-
-import { CustomHttpService } from './core/services/custom-http/custom-http.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +13,12 @@ export class AppComponent implements OnInit {
   loading: Observable<Boolean>;
 
   constructor(
-    private customHttpService: CustomHttpService,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
   ) {}
 
   ngOnInit() {
-    this.loading = this.customHttpService.loading;
+    // TODO: Implement final loading spinner solution
+    // this.loading = this.customHttpService.loading;
 
     // TODO: Remove this data generator.
     /* const sections = ['events', 'news', 'jobs'];

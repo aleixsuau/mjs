@@ -1,0 +1,17 @@
+<div class="login-providers-container">
+  <div class="login-providers"
+       *ngIf="show"
+       @rolling>
+      <div class="triangle"></div>
+      <div *ngIf="!(user$ | async)?.displayName">
+          <firebase-ui (signInSuccess)="onSignInSuccess()"></firebase-ui>
+      </div>
+      <div class="user-menu"
+           *ngIf="(user$ | async)?.displayName">
+        <button md-raised-button
+                (click)="logOut();">
+                LogOut
+        </button>
+      </div>
+  </div>
+</div>

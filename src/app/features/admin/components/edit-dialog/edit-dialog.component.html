@@ -92,46 +92,13 @@
                               }"
                     class="upload-image">
               </div>
-              <p><strong>{{ image?.title | uppercase }}</strong> ({{ image?.size / 1000 }}kb)</p>
+              <p><strong>{{ image?.title | truncate: 20 | uppercase }}</strong> <span>({{ image?.size / 1000 }}kb)</span></p>
               <button md-icon-button
                       (click)="deleteFile()"
                       color="primary">
                 <md-icon class="md-24" aria-label="delete">delete</md-icon>
               </button>
             </div>
-            <!-- <div *ngIf="!image && !uploading">
-              <label for="image-input"
-                      class="image-input">
-                <md-icon class="md-12"
-                          aria-label="delete"
-                          color="primary">
-                          add_a_photo
-                </md-icon>
-                <p>Choose Image</p>
-              </label>
-              <input formControlName="image"
-                     id="image-input"
-                     type="file"
-                     (change)="detectFiles($event)"
-                     placeholder="Image">
-            </div>
-            <div class="upload" #uploadBar>
-                <div *ngIf="image || uploading">
-                  <div [ngStyle]="{ 'background-image': 'url(' + image?.url + ')',
-                                    'background-size': 'cover',
-                                    'background-repeat': 'no-repeat',
-                                    'background-position': 'center center'
-                                  }"
-                        class="upload-image">
-                  </div>
-                  <p><strong>{{ image?.title | uppercase }}</strong> ({{ image?.size / 1000 }}kb)</p>
-                  <button md-icon-button
-                          (click)="deleteFile(data.section, image?.title);"
-                          color="primary">
-                    <md-icon class="md-24" aria-label="delete">delete</md-icon>
-                  </button>
-                </div>
-            </div> -->
           </div>
         </form>
     </div>
@@ -139,11 +106,6 @@
   <div layout="row">
       <div md-dialog-actions>
         <!-- RETURN THE FORMRESULT WHEN THE DIALOG IS CLOSED -->
-        <!-- <button md-raised-button
-                (click)="deletePendentImages()"
-                [md-dialog-close]="editForm.value"
-                [disabled]="editForm.invalid"
-                color="accent"> -->
         <button md-raised-button
                 (click)="processDialogResult(editForm.value)"
                 [disabled]="editForm.invalid"

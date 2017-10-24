@@ -11,6 +11,7 @@ import { AdminComponent } from './../../features/admin/containers/admin/admin.co
 import { AnimationsComponent } from './../../features/animations/animations.component';
 
 import { AgendaResolverService } from './../../features/agenda/services/agenda-resolver/agenda-resolver.service';
+import { CanActivateAdminService } from './../guards/admin/can-activate-admin.service';
 
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'agenda', component: AgendaComponent },
   { path: 'jobs', component: JobsPreviewComponent },
   { path: 'news', component: NewsPreviewComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin', canActivate: [CanActivateAdminService], component: AdminComponent },
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: '**', component: HomeComponent },
 ];

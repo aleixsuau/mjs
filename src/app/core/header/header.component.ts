@@ -1,8 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthService } from './../services/auth/auth.service';
-import 'rxjs/add/operator/take';
+import { UserService } from './../services/user/user.service';
 
 @Component({
   selector: 'app-header',
@@ -13,17 +12,17 @@ export class HeaderComponent implements OnInit {
 
   // Flag to show/hide login menu
   showLogin: boolean;
-  $user: Observable<IUser>;
+  user$: Observable<IUser>;
   @Output()
   onMenuClick: EventEmitter<string> = new EventEmitter();
 
   constructor(
-    private authService: AuthService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
-    this.$user = this.authService
-                        .$user
+    this.user$ = this.userService
+                        .user$
                         .map((user) => {
                           // Hide Login Menu if the user is logged
                           if (user) {

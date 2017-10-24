@@ -11,7 +11,6 @@ import {
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/Rx';
 
 @Injectable()
 export class CustomHttpService extends Http {

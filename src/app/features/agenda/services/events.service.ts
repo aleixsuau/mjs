@@ -3,9 +3,6 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -36,8 +33,8 @@ export class EventsService {
     read() {
       this.db.list(this.endPoint)
                 .valueChanges()
-                .subscribe((response) => {
-                  this.store = response as IEvent[];
+                .subscribe((response: IEvent[]) => {
+                  this.store = response;
                   this._collection.next(this.store);
                 });
     }

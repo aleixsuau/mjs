@@ -28,11 +28,6 @@ import {trigger,
       transition('* <=> *', [
         style({ opacity: 0, transform: 'translateX(-400px)'}),
         animate('500ms ease-in', style({ opacity: 1, transform: 'translateX(40px)'})),
-        /* group([
-          animate('500ms ease-in', style({ opacity: 1, transform: 'translateX(-400px)'})),
-          animate('500ms 500ms ease-in', style({ opacity: 1, transform: 'translateX(400px)'})),
-          animate('500ms 1000ms ease-in', style({ transform: 'translateX(0px)'}))
-        ]) */
       ])
     ])
   ],

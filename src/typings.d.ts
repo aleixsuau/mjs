@@ -49,6 +49,7 @@ interface IUser {
   photoURL: string;
   emailVerified: boolean;
   uid: string;
+  role?: string;
 }
 
 interface IImage {

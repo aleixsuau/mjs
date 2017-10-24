@@ -10,6 +10,8 @@ import { DialogComponent } from './../../../../shared/components/dialog/dialog.c
 import { NewsService } from './../../../news/news.service';
 import { JobsService } from './../../../jobs/jobs.service';
 import { EventsService } from './../../../agenda/services/events.service';
+import { UserService } from './../../../../core/services/user/user.service';
+import { UsersService } from './../../../../core/services/users/users.service';
 
 @Component({
   selector: 'app-admin',
@@ -21,6 +23,8 @@ export class AdminComponent implements OnInit {
   events: Observable<IEvent[]>;
   news: Observable<INew[]>;
   jobs: Observable<IJob[]>;
+  users: Observable<IUser[]>;
+  user$: Observable<IUser>;
   eventsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
   newsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
   jobsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
@@ -29,6 +33,8 @@ export class AdminComponent implements OnInit {
     private eventsService: EventsService,
     private newsService: NewsService,
     private jobsService: JobsService,
+    private userService: UserService,
+    private usersService: UsersService,
     private formBuilder: FormBuilder,
     public dialog: MdDialog,
   ) { }
@@ -37,7 +43,8 @@ export class AdminComponent implements OnInit {
     this.events = this.eventsService.collection;
     this.news = this.newsService.collection;
     this.jobs = this.jobsService.collection;
-
+    this.users = this.usersService.collection;
+    this.user$ = this.userService.user$;
 
     const today = `${new Date().getFullYear()}` +
                   `-${new Date().getMonth() < 10 ? `0${new Date().getMonth()}` : new Date().getMonth()}` +
@@ -54,7 +61,6 @@ export class AdminComponent implements OnInit {
         .afterClosed()
         .subscribe(editedItem => {
           const service = `${section}Service`;
-          console.log('editedItem: ', editedItem);
 
           if (item && editedItem) {
             const itemToSave = {...item, ...editedItem};
@@ -68,7 +74,7 @@ export class AdminComponent implements OnInit {
   }
 
   openNotifyDialog(item, section) {
-    const NotifyDialogRef = this.dialog.open(DialogComponent, { data: { message: 'Are you sure you want to motherfucker DELETE this?'} });
+    const NotifyDialogRef = this.dialog.open(DialogComponent, { data: { message: 'Are you sure you want to DELETE this?'} });
     NotifyDialogRef
       .afterClosed()
       .subscribe(ok => {
@@ -77,6 +83,10 @@ export class AdminComponent implements OnInit {
           this[service].delete(item);
         }
       });
+  }
+
+  onRoleChange(user) {
+    this.usersService.update(user);
   }
 
 }

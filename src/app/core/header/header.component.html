@@ -1,10 +1,10 @@
 <!-- HEADER -->
-<md-toolbar color="accent">
-  <md-icon (click)="emitToggle();">menu</md-icon>
+<mat-toolbar color="accent">
+  <mat-icon (click)="emitToggle();">menu</mat-icon>
   <a routerLink="/home">
-    <h2 class="customFont">
-        MALLORCA JS
-    </h2>
+    <h1 class="customFont">
+        Mallorca JS
+    </h1>
   </a>
   <div class="login-section"
        (mouseenter)="showLogin = true"
@@ -14,14 +14,21 @@
          <p>LogIn</p>
     </div>
     <div class="user-data"
-        *ngIf="(user$ | async)?.displayName">
+         *ngIf="(user$ | async)?.displayName">
+        <div class="username"
+             fxHide.lt-sm>
+          <p>{{ (user$ | async)?.displayName | truncate: 10}}</p>
+        </div>
         <div [ngStyle]="{ 'background-image': 'url(' + (user$ | async).photoURL + ')', 'background-size': 'cover'}"
              class="profile-image">
-        </div>
-        <div class="username">
-          <p>{{ (user$ | async)?.displayName | truncate: 10}}</p>
         </div>
     </div>
     <app-login-menu [show]="showLogin" (logged)="showLogin = false"></app-login-menu>
   </div>
-</md-toolbar>
+  <div class="circle-button">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+  </div>
+  <!-- <div class="circle"></div>
+  <div class="circle2"></div> -->
+</mat-toolbar>

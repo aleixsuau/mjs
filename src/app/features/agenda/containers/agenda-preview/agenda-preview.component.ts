@@ -10,7 +10,7 @@ import { CustomHttpService } from '../../../../core/services/custom-http/custom-
   styleUrls: ['./agenda-preview.component.css']
 })
 export class AgendaPreviewComponent implements OnInit {
-  collection: Observable<IEvent[]>;
+  collection$: Observable<IEvent[]>;
   loader: Observable<string>;
 
   constructor(
@@ -19,7 +19,7 @@ export class AgendaPreviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.collection = this.eventsService.collection;
+    this.collection$ = this.eventsService.collection$;
   }
 
   create() {

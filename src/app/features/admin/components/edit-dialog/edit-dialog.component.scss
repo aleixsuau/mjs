@@ -3,14 +3,8 @@
     max-width: 100%;
 }
 
-.first-line {
-  margin-right: 0px;
-  margin-left: 0px;
-}
-
 .block {
-  display: inline-block;
-  margin-top: 0px;
+  margin-top: 8px;
   margin-bottom: 0px;
 }
 
@@ -49,8 +43,6 @@
   width: 30%;
 }
 
-
-
 /* MATERIAL OVERWRITES */
 .mat-input-container {
     width: 100%;
@@ -64,13 +56,21 @@
   line-height: 20px;
 }
 
-.mat-dialog-actions:last-child {
-  margin-bottom: -14px;
-}
-
 .mat-progress-bar {
   position: absolute !important;
   top: 0;
   left: 0;
+}
+
+[fxLayout=row] {
+  margin-bottom: 15px;
+}
+
+[fxFlex='50']:nth-child(2) {
+  margin-left: 20px;
+}
+
+[fxFlex='47']:nth-child(2) {
+  margin-left: 20px;
 }
 

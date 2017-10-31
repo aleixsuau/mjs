@@ -1,57 +1,58 @@
 <app-header (onMenuClick)="sidenav.toggle();"></app-header>
-<md-sidenav-container>
-  <md-sidenav #sidenav mode="push">
-      <md-nav-list>
-          <md-list-item routerLinkActive="active">
-              <md-icon>date_range</md-icon>
-              <a md-line routerLink="/agenda"
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="push">
+    <mat-nav-list>
+      <mat-list-item routerLinkActive="active">
+        <mat-icon>date_range</mat-icon>
+              <a mat-line routerLink="/agenda"
                   routerLinkActiveOptions="{ exact: true }"
                   (click)="sidenav.toggle();">
                   <p>AGENDA</p>
               </a>
-          </md-list-item>
-          <md-list-item routerLinkActive="active">
-              <md-icon>new_releases</md-icon>
-              <a md-line routerLink="/news"
+          </mat-list-item>
+          <mat-list-item routerLinkActive="active">
+              <mat-icon>new_releases</mat-icon>
+              <a mat-line routerLink="/news"
                   routerLinkActiveOptions="{ exact: true }"
                   (click)="sidenav.toggle();">
                   <p>NEWS</p>
               </a>
-          </md-list-item>
-          <md-list-item routerLinkActive="active">
-              <md-icon>work</md-icon>
-              <a md-line routerLink="/jobs"
+          </mat-list-item>
+          <mat-list-item routerLinkActive="active">
+              <mat-icon>work</mat-icon>
+              <a mat-line routerLink="/jobs"
                   routerLinkActiveOptions="{ exact: true }"
                   (click)="sidenav.toggle();">
                   <p>JOBS</p>
               </a>
-          </md-list-item>
-          <md-list-item routerLinkActive="active">
-              <md-icon>settings</md-icon>
-              <a md-line routerLink="/admin"
+          </mat-list-item>
+          <mat-list-item routerLinkActive="active">
+              <mat-icon>settings</mat-icon>
+              <a mat-line routerLink="/admin"
                   routerLinkActiveOptions="{ exact: true }"
                   (click)="sidenav.toggle();">
                   <p>ADMIN</p>
               </a>
-          </md-list-item>
-          <md-list-item routerLinkActive="active">
-            <md-icon>settings_input_antenna</md-icon>
-            <a md-line routerLink="/animations"
+          </mat-list-item>
+          <mat-list-item routerLinkActive="active">
+            <mat-icon>settings_input_antenna</mat-icon>
+            <a mat-line routerLink="/animations"
                 routerLinkActiveOptions="{ exact: true }"
                 (click)="sidenav.toggle();">
                 <p>ANIMATIONS</p>
             </a>
-        </md-list-item>
-      </md-nav-list>
-  </md-sidenav>
-
+        </mat-list-item>
+      </mat-nav-list>
+  </mat-sidenav>
+  <div class="background">
+      <div class="highlight"></div>
+  </div>
   <div layout="column" class="container">
       <div class="loader" *ngIf="loading | async">Loading</div>
       <router-outlet></router-outlet>
   </div>
   <!-- <app-footer></app-footer> -->
-</md-sidenav-container>
-
+</mat-sidenav-container>
 
 
 

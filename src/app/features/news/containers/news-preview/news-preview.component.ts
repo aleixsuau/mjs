@@ -11,14 +11,14 @@ import { NewsService } from './../../news.service';
 export class NewsPreviewComponent implements OnInit {
 
   @Input()
-  collection: Observable<INew[]>;
+  collection$: Observable<INew[]>;
 
   constructor(
     private newsService: NewsService,
   ) { }
 
   ngOnInit() {
-    this.collection = this.newsService.collection;
+    this.collection$ = this.newsService.collection$;
   }
 
 }

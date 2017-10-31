@@ -1,3 +1,5 @@
+@import "~_variables.scss";
+
 .row {
     height: 90px;
     font-size: 18px;
@@ -24,9 +26,6 @@
     background-color: #ffc107;
 }
 
-.mat-input-container {
-    width: 100%;
-}
 
 .profile_image {
   height: 40px;
@@ -37,3 +36,44 @@
 .person_pin {
   margin-left: 8px;
 }
+
+.mat-input-container {
+    width: 100%;
+}
+
+.mat-table {
+  position: relative;
+  width: 100%;
+  background: transparent;
+}
+
+.mat-header-row {
+  background-color: $white;
+}
+
+.mat-row {
+  background-color: $white;
+  margin-top: 5px;
+  border-radius: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.05), 0 2px 2px 0 rgba(0,0,0, 0.05), 0 1px 5px 0 rgba(0,0,0,.05);
+}
+
+.mat-cell {
+  padding-right: 10px;
+  // margin-right: 10px;
+}
+
+mat-select {
+  width: 300px;
+}
+
+.mat-header-row {
+  background-color: transparent;
+}
+
+.mat-row:hover {
+  background-color:#f4f4f4;
+}
+

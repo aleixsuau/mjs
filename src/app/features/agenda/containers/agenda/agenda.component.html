@@ -1,20 +1,20 @@
 <div *ngIf="selectedEvent" [@selected]="selectedEvent.id">
-  <md-card>
+  <mat-card>
     <div [ngStyle]="{ 'background-image': 'url(' + selectedEvent?.image?.url + ')',
                       'background-size': 'cover',
                       'background-repeat': 'no-repeat',
                       'background-position': 'center center' }"
                       class="event-image"></div>
-    <md-card-title>
+    <mat-card-title>
       {{ selectedEvent?.title | uppercase }}
-    </md-card-title>
-    <md-card-subtitle>
+    </mat-card-title>
+    <mat-card-subtitle>
      {{ selectedEvent?.date | date:'EE, d/MM/y' }},  {{ selectedEvent?.time }}h
-    </md-card-subtitle>
-    <md-card-content>
+    </mat-card-subtitle>
+    <mat-card-content>
       {{ selectedEvent.description }}
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
 </div>
 <div class="cards-container">
   <div fxLayoutWrap>
@@ -24,27 +24,27 @@
          fxFlex.sm="50"
          fxFlex.md="30"
          fxFlex.gt-md="20">
-        <md-card>
+        <mat-card>
           <div [ngStyle]="{ 'background-image': 'url(' + event?.image?.url + ')',
                             'background-size': 'cover',
                             'background-repeat': 'no-repeat',
                             'background-position': 'center center' }"
                 class="event-image"></div>
-          <md-card-title>
+          <mat-card-title>
             {{ event?.title | uppercase }}
-          </md-card-title>
-          <md-card-subtitle>
+          </mat-card-title>
+          <mat-card-subtitle>
             {{ event?.date | date:'EE, d/MM/y' }},  {{ event?.time }}h
-          </md-card-subtitle>
-          <md-card-content>
+          </mat-card-subtitle>
+          <mat-card-content>
             {{ event?.description | truncate: 100 }}
-          </md-card-content>
-          <md-card-actions>
-            <button md-raised-button routerLink="/agenda/{{ event?.id }}">
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button routerLink="/agenda/{{ event?.id }}">
               Read
             </button>
-          </md-card-actions>
-        </md-card>
+          </mat-card-actions>
+        </mat-card>
     </div>
   </div>
 </div>

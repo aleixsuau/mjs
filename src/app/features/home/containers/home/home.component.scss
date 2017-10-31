@@ -1,0 +1,128 @@
+@import "~_variables.scss";
+
+img {
+  filter: grayscale(100%);
+}
+
+.slider-container {
+  position: relative;
+}
+
+.item-background {
+  padding-top: 400px;
+  position: relative;
+}
+
+.item-description {
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  z-index: 2;
+}
+
+.item-circle {
+  position: absolute;
+  width: 65%;
+  top: 25%;
+  left: -20%;
+  background-color: rgba(204, 204, 204, 0.60);
+  height: 150%;
+  border-radius: 100%;
+}
+
+.item-circle2 {
+  position: absolute;
+  height: 70%;
+  width: 70%;
+  background-color: rgba(171, 171, 172, 0.48);
+  border-radius: 50%;
+  top: 40%;
+  left: -10%;
+  transform: rotate(-30deg);
+}
+
+.item-circle3 {
+  position: absolute;
+  width: 60%;
+  height: 70%;
+  background-color: rgba(212, 212, 212, 0.58);
+  border-radius: 50%;
+}
+
+.circle-button-right, .circle-button-left {
+  position: absolute;
+  top: 35%;
+  z-index: 3;
+}
+
+.circle-button-left {
+  left: -20px;
+  height: 60px;
+  width: 60px;
+}
+
+.circle-button-right {
+  right: 5px;
+  height: 60px;
+  width: 60px;
+}
+
+.circle1, .circle2 {
+  position: absolute;
+  height: 50px;
+  width: 80px;
+  background-color: $accent;
+  opacity: 0.6;
+  border-radius: 100%;
+}
+
+.circle1 {
+  transform: rotate(25deg);
+  height: 60px;
+}
+
+.circle-button-right .circle1 {
+  transform: rotate(-15deg);
+  height: 60px;
+}
+
+.circle-button-right .circle2 {
+  transform: rotate(195deg);
+  height: 60px;
+}
+
+.circle-button-left mat-icon {
+  position: absolute;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  padding-left: 30px;
+  padding-top: 18px;
+}
+
+.circle-button-right mat-icon:hover, .circle-button-left mat-icon:hover {
+  background-color: rgba(220, 165, 28, 0.35);
+  border-radius: 100%;
+}
+
+.circle-button-right mat-icon {
+  position: absolute;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  padding-left: 30px;
+  padding-top: 18px;
+}
+
+.item-image {
+  height: 300px;
+  width: 100%;
+}
+
+/* MATERIAL OVERWRITES */
+mat-card {
+  overflow: hidden;
+  margin: 20px;
+}
+

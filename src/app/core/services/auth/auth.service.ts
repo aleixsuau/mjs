@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/take';
 
 // Firebase
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth/auth';
 
 import { UserService } from './../user/user.service';
 import { UsersService } from './../users/users.service';
 
-import 'rxjs/add/operator/take';
 
 
 @Injectable()

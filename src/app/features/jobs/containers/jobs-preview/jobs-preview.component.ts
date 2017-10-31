@@ -10,14 +10,14 @@ import { JobsService } from '../../jobs.service';
   styleUrls: ['./jobs-preview.component.css']
 })
 export class JobsPreviewComponent implements OnInit {
-  collection: Observable<IJob[]>;
+  collection$: Observable<IJob[]>;
 
   constructor(
     private jobsService: JobsService,
   ) {}
 
   ngOnInit() {
-    this.collection = this.jobsService.collection;
+    this.collection$ = this.jobsService.collection$;
   }
 
 }

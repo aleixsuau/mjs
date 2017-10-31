@@ -1,3 +1,10 @@
+@import "~_variables.scss";
+
+h1 {
+  margin-left: 30px;
+  font-size: 35px;
+}
+
 a {
     text-decoration: none;
 }
@@ -5,7 +12,7 @@ a:visited {
     color: black;
 }
 
-md-icon {
+mat-icon {
     padding-right: 15px;
     cursor: pointer;
 }
@@ -13,7 +20,7 @@ md-icon {
 .login-section {
   position: absolute;
   height: 64px;
-  right: 15px;
+  right: 12px;
 }
 
 .login-button {
@@ -30,12 +37,108 @@ md-icon {
   height: 40px;
   width: 40px;
   margin-top: 11px;
-  margin-right: 12px;
+  margin-left: 12px;
   border-radius: 50%;
-  border: 2px solid #c89604;
 }
 
 .username {
   float: left;
   height: 64px;
+}
+
+.mat-toolbar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95% !important;
+  background-color: transparent !important;
+  /* background-image: linear-gradient(to right, #f0b823, transparent 40%) !important; */
+  color: $black !important;
+  max-width: 1150px;
+  min-height: 64px;
+  margin-top: 20px !important;
+  padding-left: 35px !important;
+  border-radius: 40px;
+  z-index: 7;
+  margin-top: 20px;
+  /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+}
+
+/* Logo */
+/* .circle {
+  position: absolute;
+  height: 80%;
+  width: 30%;
+  background-color: rgba(255, 192, 11, 0.64);
+  border-radius: 50%;
+  top: 0px;
+  left: -20px;
+  z-index: -1;
+  transform: rotate(10deg);
+}
+
+.circle2 {
+  position: absolute;
+  height: 110%;
+  width: 25%;
+  background-color: rgba(255, 192, 11, 0.39);
+  border-radius: 50%;
+  top: -10px;
+  left: -20px;
+  z-index: -1;
+  -webkit-transform: rotate(10deg);
+  transform: rotate(-10deg);
+}
+
+.circle1, .circle2 {
+  position: absolute;
+  height: 50px;
+  width: 80px;
+  background-color:rgba(255, 192, 10, 0.62);
+  border-radius: 100%;
+} */
+
+.circle-button {
+  position: absolute;
+}
+
+.circle1 {
+  transform: rotate(25deg);
+  height: 60px;
+}
+
+.circle-button .circle1 {
+  transform: rotate(-15deg);
+  height: 60px;
+  width: 70px;
+  background-color: rgba(187, 186, 186, 0.47);
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+  top: -30px;
+  left: -25px;
+  animation: flowrotation 60s infinite;
+}
+
+.circle-button .circle2 {
+  transform: rotate(45deg);
+  height: 60px;
+  width: 85px;
+  background-color: rgba(187, 186, 186, 0.47);
+  border-radius: 50%;
+  position: absolute;
+  z-index: -2;
+  top: -30px;
+  left: -30px;
+  animation: flowrotation 60s infinite;
+}
+
+@keyframes flowrotation {
+  33% {
+    transform: rotate(120deg) scale(0.8);
+  }
+  66% {
+    transform: rotate(-120deg) scale(1.1);
+  }
 }

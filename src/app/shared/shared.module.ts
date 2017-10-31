@@ -5,13 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Material
-import { MaterialModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
-// Covalent
-import { CovalentLayoutModule } from '@covalent/core';
-import { CovalentCommonModule } from '@covalent/core';
-import { CovalentExpansionPanelModule } from '@covalent/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Flex
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -24,6 +30,7 @@ import { UploadService } from './services/upload/upload.service';
 import { UppercaserPipe } from './pipes/uppercaser/uppercaser.pipe';
 import { FilterPipe } from './pipes/filter/filter.pipe';
 import { InputFileComponent } from './components/input-file/input-file.component';
+import { TruncatePipe } from './pipes/truncate/truncate.pipe';
 
 @NgModule({
   imports: [
@@ -32,12 +39,18 @@ import { InputFileComponent } from './components/input-file/input-file.component
     FormsModule,
     ReactiveFormsModule,
     // Material
-    MaterialModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatTableModule,
     BrowserAnimationsModule,
-    // Covalent
-    CovalentLayoutModule,
-    CovalentCommonModule,
-    CovalentExpansionPanelModule,
     // Flex
     FlexLayoutModule,
   ],
@@ -47,6 +60,7 @@ import { InputFileComponent } from './components/input-file/input-file.component
     // TODO: remove this
     UppercaserPipe,
     FilterPipe,
+    TruncatePipe,
   ],
   providers: [
     UploadService
@@ -56,16 +70,24 @@ import { InputFileComponent } from './components/input-file/input-file.component
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatTableModule,
     BrowserAnimationsModule,
-    CovalentLayoutModule,
-    CovalentCommonModule,
-    CovalentExpansionPanelModule,
     FlexLayoutModule,
     DialogComponent,
     InputFileComponent,
     UppercaserPipe,
     FilterPipe,
+    TruncatePipe,
   ]
 })
 export class SharedModule { }

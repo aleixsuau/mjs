@@ -2,6 +2,7 @@ import { EventsService } from './../../services/events.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/pluck';
 
 import {trigger,
         animate,
@@ -55,7 +56,7 @@ export class AgendaComponent implements OnInit {
 
   filterCollection() {
     this.events = this.eventsService
-                          .collection
+                          .collection$
                           .map(events => events.filter(event => this.selectedEvent ? event.id !== this.selectedEvent.id : true));
   }
 

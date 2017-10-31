@@ -25,22 +25,22 @@ import 'hammerjs';
 
 import { AppConfig } from './app.config';
 
-// TODO: Remove in-memory-web-api
-// Imports for loading & configuring the in-memory web api (test REST API)
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './shared/services/in-memory-data.service';
 import { AdminComponent } from './features/admin/containers/admin/admin.component';
 import { AnimationsComponent } from './features/animations/animations.component';
+
+import { enableProdMode } from '@angular/core';
+
+// Enable production mode unless running locally
+if (!/localhost/.test(document.location.host)) {
+  enableProdMode();
+}
 
 // Firebase Auth Config
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
   providers: [
     AuthProvider.Google,
-    /* facebookCustomConfig,
-    AuthProvider.Twitter, */
     AuthProvider.Github,
     AuthProvider.Password,
-    /* AuthProvider.Phone */
   ],
   method: AuthMethods.Redirect,
   tos: '<your-tos-link>' // Terms & Conditions Link
@@ -56,11 +56,6 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    // in-memory-web-api
-    InMemoryWebApiModule.forRoot(
-      InMemoryDataService,
-      { passThruUnknownUrl: true }
-    ),
     // Firebase
     AngularFireModule.initializeApp(
       environment.firebase,

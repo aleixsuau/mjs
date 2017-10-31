@@ -8,7 +8,7 @@
       </div>
       <div class="user-menu"
            *ngIf="(user$ | async)?.displayName">
-        <button md-raised-button
+        <button mat-raised-button
                 (click)="logOut();">
                 LogOut
         </button>

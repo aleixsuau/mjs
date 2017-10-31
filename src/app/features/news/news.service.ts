@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publishReplay';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -13,7 +12,7 @@ export class NewsService {
 
     private store: IEvent[] = [];
     private _collection: BehaviorSubject<IEvent[]> = new BehaviorSubject([]);
-    readonly collection: Observable<IEvent[]> = this._collection.asObservable().share();
+    readonly collection$: Observable<IEvent[]> = this._collection.asObservable().publishReplay(1).refCount();
     private endPoint: string;
 
     constructor(

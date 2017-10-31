@@ -3,23 +3,31 @@
 @import '~https://fonts.googleapis.com/icon?family=Roboto';
 @import '~https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400';
 @import '~https://fonts.googleapis.com/css?family=Barrio|Nunito:300,300i,400';
+@import '~https://fonts.googleapis.com/css?family=Raleway:300,300i,400';
 
 
 /* CUSTOM OVERWRITES */
 html, body {
-    font-family: 'Roboto';
-    font-size: 14px;
-    margin: 0px;
-    height: 100% !important;
-    width: 100%;
+  font-size: 14px;
+  margin: 0px;
+  height: 100% !important;
+  width: 100%;
 }
 
 p {
-    font-size: 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  margin-bottom: 0px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Nunito';
+  font-family: 'Raleway', sans-serif !important;
+  font-weight: 600;
+  color: #292929;
+}
+
+h4 {
+  margin: 0px;
 }
 
 /* MATERIAL OVERWRITES */
@@ -27,16 +35,25 @@ a:focus {
   outline: none;
 }
 
-md-card-actions {
-    text-align: right;
+mat-card-actions {
+  text-align: right;
 }
 
 .round-button.mat-raised-button, .round-button .mat-button-ripple {
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 .round-button.mat-raised-button {
-    margin: 5px;
+  margin: 5px;
 }
+
+.mat-sidenav-content {
+  min-height: 100vh;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 0px !important;
+}
+
 
 

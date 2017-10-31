@@ -1,17 +1,92 @@
 <!-- TODO: Remove this -->
 <!-- <div>
-  <p>{{ 'hola' | uppercaser }}</p>
+  <p>{{ 'hola' | uppercaser}}</p>
 </div> -->
-<div layout="row">
-  <div flex>
-      <app-agenda-preview></app-agenda-preview>
+<div fxLayoutWrap>
+  <div fxFlex="100">
+    <div *ngIf="selectedEvent" class="slider-container" @fade>
+      <div class="circle-button-left">
+          <div class="circle1"></div>
+          <div class="circle2"></div>
+          <mat-icon (click)="prevEvent()">
+            arrow_back
+          </mat-icon>
+      </div>
+      <div class="circle-button-right">
+          <div class="circle1"></div>
+          <div class="circle2"></div>
+          <mat-icon (click)="nextEvent()">
+            arrow_forward
+          </mat-icon>
+      </div>
+      <mat-card [@fade]="selectedEvent.title"
+                [ngStyle]="{ 'background-image': 'url(' + selectedEvent.image.url + ')',
+                            'background-size': 'cover',
+                            'background-repeat': 'no-repeat',
+                            'background-position': 'center center' }">
+        <div class="item-background">
+          <div class="item-description">
+            <mat-card-title>
+              <h4>{{ selectedEvent.title }}</h4>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p>{{ selectedEvent.date | date:'EE, d/MM/y' }},  {{ selectedEvent.time }}h</p>
+            </mat-card-subtitle>
+            <mat-card-content>
+              <p>{{ selectedEvent.description | truncate: 120 }}</p>
+            </mat-card-content>
+          </div>
+          <div class="item-circle2"></div>
+          <div class="item-circle"></div>
+        </div>
+      </mat-card>
+    </div>
   </div>
-</div>
-<div layout="row">
-  <div flex>
-      <app-news-preview></app-news-preview>
+  <div fxFlex.lt-md="100" fxFlex.gt-sm="50">
+      <mat-card *ngIf="selectedNew"
+                [ngStyle]="{ 'background-image': 'url(' + selectedNew.image?.url + ')',
+                            'background-size': 'cover',
+                            'background-repeat': 'no-repeat',
+                            'background-position': 'center center' }"
+                @fade>
+          <div class="item-background">
+            <div class="item-description">
+              <mat-card-title>
+                <h4>{{ selectedNew.title }}</h4>
+              </mat-card-title>
+              <mat-card-subtitle>
+                <p>{{ selectedNew.date | date:'EE, d/MM/y' }},  {{ selectedNew.time }}h</p>
+              </mat-card-subtitle>
+              <mat-card-content>
+                <p>{{ selectedNew.description | truncate: 120 }}</p>
+              </mat-card-content>
+            </div>
+            <div class="item-circle3"></div>
+            <div class="item-circle"></div>
+          </div>
+      </mat-card>
   </div>
-  <div flex>
-      <app-jobs-preview></app-jobs-preview>
+  <div fxFlex.lt-md="100" fxFlex.gt-sm="50">
+      <mat-card *ngIf="selectedJob"
+               [ngStyle]="{ 'background-image': 'url(' + selectedJob.image?.url + ')',
+               'background-size': 'cover',
+               'background-repeat': 'no-repeat',
+               'background-position': 'center center' }"
+               @fade>
+        <div class="item-background">
+          <div class="item-description">
+            <mat-card-title>
+              <h4>{{ selectedJob.title }}</h4>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p>{{ selectedJob.date | date:'EE, d/MM/y' }},  {{ selectedJob.time }}h</p>
+            </mat-card-subtitle>
+            <mat-card-content>
+              <p>{{ selectedJob.description | truncate: 120 }}</p>
+            </mat-card-content>
+          </div>
+          <div class="item-circle"></div>
+        </div>
+      </mat-card>
   </div>
 </div>

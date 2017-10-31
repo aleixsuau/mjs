@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@an
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/filter';
 
-import { Upload } from './../../../../shared/services/upload/upload';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { UploadService } from './../../../../shared/services/upload/upload.service';
 import { ImageResizerService } from './../../../../core/services/image-resizer/image-resizer.service';
 
@@ -14,7 +16,7 @@ import { ImageResizerService } from './../../../../core/services/image-resizer/i
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.scss']
 })
-export class EditDialogComponent implements OnInit, OnDestroy {
+export class EditDialogComponent implements OnInit {
 
   editForm: FormGroup;
   image: IImage;
@@ -32,8 +34,8 @@ export class EditDialogComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private uploadService: UploadService,
     private imageResizerService: ImageResizerService,
-    private dialog: MdDialogRef<EditDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    private dialog: MatDialogRef<EditDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
@@ -60,10 +62,6 @@ export class EditDialogComponent implements OnInit, OnDestroy {
     } else {
       this.addSpeaker();
     }
-  }
-
-  ngOnDestroy() {
-    console.log('OnDestroy');
   }
 
   addSpeaker() {
@@ -107,7 +105,7 @@ export class EditDialogComponent implements OnInit, OnDestroy {
 
   uploadFile(file) {
     if (!file) { return; };
-    // Set upload % for the md-progress-bar
+    // Set upload % for the mat-progress-bar
     this.uploadService
             .progress
             .subscribe((progress) => {

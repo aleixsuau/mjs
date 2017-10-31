@@ -1,11 +1,11 @@
-<md-card>
-  <md-card-title>
+<mat-card>
+  <mat-card-title>
     <h3>News</h3>
-  </md-card-title>
-  <md-card-subtitle>
+  </mat-card-title>
+  <mat-card-subtitle>
     <h2>Últimas noticias de Mallorca JS</h2>
-  </md-card-subtitle>
-  <md-card-content>
-    <app-new *ngFor="let item of collection | async" [item]="item"></app-new>
-  </md-card-content>
-</md-card>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <app-new *ngFor="let item of collection$ | async" [item]="item"></app-new>
+  </mat-card-content>
+</mat-card>

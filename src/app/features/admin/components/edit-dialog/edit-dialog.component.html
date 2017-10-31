@@ -1,87 +1,92 @@
-<md-progress-bar color="accent"
+<mat-progress-bar color="accent"
                  mode="indeterminate"
                  *ngIf="uploading">
-</md-progress-bar>
+</mat-progress-bar>
 <div class="editDialog">
-  <h4 md-dialog-title>{{ data.section | uppercase }} EDITOR</h4>
-  <div md-dialog-content>
-    <div layout="column" class="container">
+  <h4 mat-dialog-title>{{ data.section | uppercase }} EDITOR</h4>
+  <div mat-dialog-content>
+    <div fxLayout="column"
+         class="container">
         <form [formGroup]="editForm">
-          <div layout="row" class="first-line" layout-margin>
-            <div flex>
-              <md-input-container>
-                <input mdInput
+          <div fxLayout="row">
+            <div fxFlex="50">
+              <mat-input-container>
+                <input matInput
                       formControlName="date"
                       type="date"
                       placeholder="Date">
-              </md-input-container>
+              </mat-input-container>
             </div>
-            <div flex>
-              <md-input-container>
-                <input mdInput
+            <div fxFlex="50">
+              <mat-input-container>
+                <input matInput
                       formControlName="time"
                       type="time"
                       placeholder="Hour">
-              </md-input-container>
+              </mat-input-container>
             </div>
           </div>
-          <div layout="row" layout-margin>
-            <md-input-container>
-              <input mdInput
+          <div fxLayout="row">
+            <mat-input-container>
+              <input matInput
                     formControlName="title"
                     type="text"
                     placeholder="Title">
-            </md-input-container>
+            </mat-input-container>
           </div>
-          <div layout="row" layout-margin>
-            <md-input-container>
-              <textarea mdInput
+          <div fxLayout="row">
+            <mat-input-container>
+              <textarea matInput
                         formControlName="description"
                         type="text"
                         placeholder="Descripción">
               </textarea>
-            </md-input-container>
+            </mat-input-container>
           </div>
-          <div formArrayName="speakers">
+          <div fxLayout="row">
             <p class="block">Speakers</p>
-            <button md-icon-button
+            <button mat-icon-button
                     (click)="addSpeaker();"
-                    class="md-24"
+                    class="mat-24"
                     aria-label="Add order"
                     color="accent">
-              <md-icon>add</md-icon>
+              <mat-icon>add</mat-icon>
             </button>
+          </div>
+          <div formArrayName="speakers">
             <div *ngFor="let speaker of speakers.controls; let i = index"
                 [formGroupName]="i"
-                layout="row" layout-margin>
-                <div flex>
-                  <md-input-container>
-                    <input mdInput
+                fxLayout="row">
+                <div fxFlex="47">
+                  <mat-input-container>
+                    <input matInput
                           formControlName="name"
                           type="text"
                           size="20"
                           placeholder="Name">
-                    </md-input-container>
+                    </mat-input-container>
                 </div>
-                <div flex>
-                  <md-input-container>
-                    <input mdInput
+                <div fxFlex="47">
+                  <mat-input-container>
+                    <input matInput
                            formControlName="contact"
                            type="text"
                            size="20"
                            placeholder="Contact">
-                  </md-input-container>
+                  </mat-input-container>
                 </div>
-                <button md-icon-button
-                        (click)="removeSpeaker(i)"
-                        color="primary"
-                        type="button"
-                        *ngIf="speakers.controls.length > 1">
-                        <md-icon>delete</md-icon>
-                </button>
+                <div fxFlex="6">
+                  <button mat-icon-button
+                          (click)="removeSpeaker(i)"
+                          color="primary"
+                          type="button"
+                          *ngIf="speakers.controls.length > 1">
+                          <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
             </div>
           </div>
-          <div layout="row" layout-margin>
+          <div fxLayout="row">
             <app-input-file formControlName="image" *ngIf="!image">
             </app-input-file>
             <div class="upload" *ngIf="image">
@@ -93,30 +98,30 @@
                     class="upload-image">
               </div>
               <p><strong>{{ image?.title | truncate: 20 | uppercase }}</strong> <span>({{ image?.size / 1000 }}kb)</span></p>
-              <button md-icon-button
+              <button mat-icon-button
                       (click)="deleteFile()"
                       color="primary">
-                <md-icon class="md-24" aria-label="delete">delete</md-icon>
+                <mat-icon class="mat-24" aria-label="delete">delete</mat-icon>
               </button>
             </div>
           </div>
         </form>
     </div>
   </div>
-  <div layout="row">
-      <div md-dialog-actions>
+  <div fxLayout="row">
+      <div mat-dialog-actions>
         <!-- RETURN THE FORMRESULT WHEN THE DIALOG IS CLOSED -->
-        <button md-raised-button
+        <button mat-raised-button
                 (click)="processDialogResult(editForm.value)"
                 [disabled]="editForm.invalid"
                 color="accent">
-                  <md-icon>save</md-icon>
+                  <mat-icon>save</mat-icon>
                   Salvar
         </button>
-        <button md-raised-button
-                md-dialog-close
+        <button mat-raised-button
+                mat-dialog-close
                 color="warn">
-                  <md-icon>close</md-icon>
+                  <mat-icon>close</mat-icon>
                   Close
         </button>
       </div>

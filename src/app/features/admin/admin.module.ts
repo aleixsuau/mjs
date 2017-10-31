@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CovalentDataTableModule } from '@covalent/core';
-
 import { SharedModule } from './../../shared/shared.module';
 
 import { AdminComponent } from './containers/admin/admin.component';
@@ -11,7 +9,6 @@ import { DialogComponent } from './../../shared/components/dialog/dialog.compone
 @NgModule({
   imports: [
     SharedModule,
-    CovalentDataTableModule
   ],
   declarations: [
     AdminComponent,

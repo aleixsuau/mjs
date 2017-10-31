@@ -13,7 +13,7 @@ export class UsersService {
 
     private store: IUser[] = [];
     private _collection: BehaviorSubject<IUser[]> = new BehaviorSubject([]);
-    readonly collection: Observable<IUser[]> = this._collection.asObservable().share();
+    readonly collection$: Observable<IUser[]> = this._collection.asObservable().share();
     private endPoint: string;
 
     constructor(

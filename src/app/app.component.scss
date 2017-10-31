@@ -1,4 +1,4 @@
-md-sidenav-container, .mat-sidenav.mat-sidenav-push {
+mat-sidenav-container, .mat-sidenav.mat-sidenav-push {
     background: rgba(226,226,226,1) !important;
     background: -moz-linear-gradient(-45deg, rgba(226,226,226,1) 0%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 51%, rgba(254,254,254,1) 100%) !important;
     background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(226,226,226,1)), color-stop(51%, rgba(209,209,209,1)), color-stop(51%, rgba(219,219,219,1)), color-stop(100%, rgba(254,254,254,1))) !important;
@@ -9,16 +9,16 @@ md-sidenav-container, .mat-sidenav.mat-sidenav-push {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=1 );
 }
 
-md-sidenav-container {
+mat-sidenav-container {
     height: auto !important;
     min-height: 100%;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 100%;
+  max-width: 1200px;
+  padding-top: 130px !important;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .loader {
@@ -30,4 +30,35 @@ md-sidenav-container {
 .login-buttons {
   position: absolute;
   right: 15px;
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 96vw;
+  overflow: hidden;
+}
+
+.highlight {
+  position: absolute;
+  background: rgba(194, 194, 194, 0.21);
+  height: 79vh;
+  width: 140vw;
+  margin-left: -50vw;
+  margin-top: -25vh;
+  border-radius: 50%;
+  animation: flowrotation 60s infinite;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(147, 147, 150, 0.05));
+}
+
+@keyframes flowrotation {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(20deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
 }

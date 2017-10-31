@@ -1,6 +1,7 @@
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/publishReplay';
 
 import * as firebase from 'firebase/app';
 import 'firebase/storage';

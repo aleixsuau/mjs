@@ -2,7 +2,7 @@
   <p>Círculo</p>
 </div> -->
 
-<button md-raised-button (click)="show = !show" color="accent">
+<button mat-raised-button (click)="show = !show" color="accent">
   {{ show ? 'HIDE' : 'SHOW' }}
 </button>
 
@@ -21,7 +21,7 @@
        [@selected]="car.selected"
        (@selected.done)="logIt($event)">
     <h4>{{ car.name | uppercase }} ({{ car.year }}) - <i>{{ car.price }}€</i></h4>
-    <button md-raised-button
+    <button mat-raised-button
             (click)="car.selected === 'selected' ?
                             car.selected = 'notSelected' :
                             car.selected = 'selected'"

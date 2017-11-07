@@ -12,7 +12,6 @@ export class AgendaResolverService implements Resolve<IEvent> {
 
   resolve(activeRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IEvent> {
     const id = activeRoute.params['id'];
-    console.log('activeRoute: ', id, activeRoute, state);
     return this.eventsService
                   .readOne(id)
                   .take(1);

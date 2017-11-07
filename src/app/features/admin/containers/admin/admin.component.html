@@ -26,278 +26,121 @@
   </button>
 </div>
 
-<div fxLayout="row">
-  <mat-table [dataSource]="dataSource"
-            *ngIf="formSection !== 'users'"
-            #table>
+<div [@enterUp]="formSection">
+  <div fxLayout="row">
+    <mat-table [dataSource]="dataSource"
+               *ngIf="formSection && formSection === 'users'"
+               #usersTable>
 
-    <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef fxFlex="15"> TITLE </mat-header-cell>
-      <mat-cell *matCellDef="let element" fxFlex="15"> {{element.title}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef fxFlex="35"> DESCRIPTION </mat-header-cell>
-      <mat-cell *matCellDef="let element" fxFlex="35"> {{element.description | truncate: 120}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef fxFlex="20"> DATE </mat-header-cell>
-      <mat-cell *matCellDef="let element" fxFlex="20"> {{ element.date | date:'fullDate'}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="time" >
-      <mat-header-cell *matHeaderCellDef fxFlex="5"> TIME </mat-header-cell>
-      <mat-cell *matCellDef="let element" fxFlex="5"> {{element.time}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="image">
-      <mat-header-cell *matHeaderCellDef fxFlex="20"> IMAGE </mat-header-cell>
-      <mat-cell *matCellDef="let element" fxFlex="20"> {{element.image.title | truncate:20:true}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef fxFlex="5"></mat-header-cell>
-      <mat-cell *matCellDef="let element" fxFlex="5">
-        <button mat-icon-button
-                (click)="openEditDialog(element, formSection)"
-                color="primary">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef fxFlex="5"></mat-header-cell>
-      <mat-cell *matCellDef="let element" fxFlex="5">
-        <button mat-icon-button
-                (click)="openNotifyDialog(element, formSection)"
-                color="primary">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-</div>
-
-<div fxLayout="row">
-  <mat-table [dataSource]="dataSource"
-             *ngIf="formSection === 'users'"
-             #usersTable>
-
-    <ng-container matColumnDef="image">
-      <mat-header-cell *matHeaderCellDef fxFlex="5">
-          <mat-icon class="person_pin">person_pin</mat-icon>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let user" fxFlex="5">
-          <div [ngStyle]="{ 'background-image': 'url(' + user.photoURL + ')', 'background-size': 'cover'}"
-                class="profile_image">
-          </div>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef fxFlex="25"> NAME </mat-header-cell>
-      <mat-cell *matCellDef="let user" fxFlex="25"> {{ user.displayName }} </mat-cell>
-    </ng-container>
-
-
-    <ng-container matColumnDef="role">
-      <mat-header-cell *matHeaderCellDef fxFlex="65"> ROLE </mat-header-cell>
-      <mat-cell *matCellDef="let user" fxFlex="65">
-        <mat-select [(ngModel)]="user.role"
-                    (change)="onRoleChange(user)"
-                    floatPlaceholder="never"
-                    name="role"
-                    placeholder="Select Role">
-                    <mat-option [value]="'user'">user</mat-option>
-                    <mat-option [value]="'admin'">admin</mat-option>
-        </mat-select>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef fxFlex="5"></mat-header-cell>
-      <mat-cell *matCellDef="let user" fxFlex="5">
-        <button mat-icon-button
-                (click)="openNotifyDialog(user, formSection)"
-                color="primary">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedUserColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedUserColumns;"></mat-row>
-  </mat-table>
-</div>
-<!-- <mat-card *ngIf="formSection === 'events'">
-  <table td-data-table>
-    <th td-data-table-column
-        *ngFor="let column of eventsTableColumns">
-        {{ column.label }}
-    </th>
-    <th td-data-table-column></th>
-    <th td-data-table-column></th>
-    <tr td-data-table-row *ngFor="let event of events | async">
-      <td td-data-table-cell>
-        {{ event?.title }}
-      </td>
-      <td td-data-table-cell>
-        {{ event?.description | truncate: 30 }}
-      </td>
-      <td td-data-table-cell>
-        {{ event?.date | date:'fullDate'}}
-      </td>
-      <td td-data-table-cell>
-        {{ event?.time }}
-      </td>
-      <td td-data-table-cell>
-        {{ event?.image?.title  | truncate: 30 }}
-      </td>
-      <td td-data-table-cell (click)="openEditDialog(event, formSection)">
-        <button mat-icon-button color="primary">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-      <td td-data-table-cell (click)="openNotifyDialog(event, formSection)">
-        <button mat-icon-button color="primary">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </tr>
-  </table>
-</mat-card> -->
-
-<!-- <mat-card *ngIf="formSection === 'news'">
-  <table td-data-table>
-    <th td-data-table-column
-        *ngFor="let column of newsTableColumns">
-        {{ column.label }}
-    </th>
-    <th td-data-table-column></th>
-    <th td-data-table-column></th>
-    <tr td-data-table-row *ngFor="let new of news | async">
-      <td td-data-table-cell>
-        {{ new.title }}
-      </td>
-      <td td-data-table-cell>
-        {{ new.description | truncate: 30 }}
-      </td>
-      <td td-data-table-cell>
-        {{ new.date | date:'fullDate' }}
-      </td>
-      <td td-data-table-cell>
-        {{ new.time }}
-      </td>
-      <td td-data-table-cell>
-        {{ new.image.title  | truncate: 30 }}
-      </td>
-      <td td-data-table-cell (click)="openEditDialog(new, formSection)">
-        <button mat-icon-button color="primary">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-      <td td-data-table-cell (click)="openNotifyDialog(new, formSection)">
-        <button mat-icon-button color="primary">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </tr>
-  </table>
-</mat-card>
-
-<mat-card *ngIf="formSection === 'jobs'">
-  <table td-data-table>
-    <th td-data-table-column
-        *ngFor="let column of jobsTableColumns">
-        {{ column.label }}
-    </th>
-    <th td-data-table-column></th>
-    <th td-data-table-column></th>
-    <tr td-data-table-row *ngFor="let job of jobs | async">
-      <td td-data-table-cell>
-        {{ job.title }}
-      </td>
-      <td td-data-table-cell>
-        {{ job.description | truncate: 30 }}
-      </td>
-      <td td-data-table-cell>
-        {{ job.date | date:'fullDate' }}
-      </td>
-      <td td-data-table-cell>
-        {{ job.time }}
-      </td>
-      <td td-data-table-cell>
-        {{ job.image.title  | truncate: 30 }}
-      </td>
-      <td td-data-table-cell (click)="openEditDialog(job, formSection)">
-        <button mat-icon-button color="primary">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-      <td td-data-table-cell (click)="openNotifyDialog(job, formSection)">
-        <button mat-icon-button color="primary">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </tr>
-  </table>
-</mat-card>
-
-<mat-card *ngIf="formSection === 'users'">
-    <table td-data-table>
-      <th td-data-table-column>
-        <mat-icon class="person_pin">person_pin</mat-icon>
-      </th>
-      <th td-data-table-column>
-          Name
-      </th>
-      <th td-data-table-column>
-          Role
-      </th>
-      <th td-data-table-column>
-      </th>
-      <th td-data-table-column>
-      </th>
-      <tr td-data-table-row *ngFor="let user of users | async">
-        <td td-data-table-cell>
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef fxFlex="5">
+            <mat-icon class="person_pin">person_pin</mat-icon>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user" fxFlex="5">
             <div [ngStyle]="{ 'background-image': 'url(' + user.photoURL + ')', 'background-size': 'cover'}"
-                 class="profile_image">
+                  class="profile_image">
             </div>
-        </td>
-        <td td-data-table-cell>
-            {{ user.displayName }}
-        </td>
-        <td td-data-table-cell>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef fxFlex="25"> NAME </mat-header-cell>
+        <mat-cell *matCellDef="let user" fxFlex="25"> {{ user.displayName }} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef fxFlex="65"> ROLE </mat-header-cell>
+        <mat-cell *matCellDef="let user" fxFlex="65">
           <mat-select [(ngModel)]="user.role"
-                     (change)="onRoleChange(user)"
-                     floatPlaceholder="never"
-                     name="role"
-                     placeholder="Select Role">
-              <mat-option [value]="'user'">user</mat-option>
-              <mat-option [value]="'admin'">admin</mat-option>
+                      (change)="onRoleChange(user)"
+                      floatPlaceholder="never"
+                      name="role"
+                      placeholder="Select Role">
+                      <mat-option [value]="'user'">user</mat-option>
+                      <mat-option [value]="'admin'">admin</mat-option>
           </mat-select>
-        </td>
-        <td td-data-table-cell>
-        </td>
-        <td td-data-table-cell (click)="openNotifyDialog(user, formSection)">
-          <button mat-icon-button color="primary">
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef fxFlex="5"></mat-header-cell>
+        <mat-cell *matCellDef="let user" fxFlex="5">
+          <button mat-icon-button
+                  (click)="openNotifyDialog(user, formSection)"
+                  color="primary">
             <mat-icon>delete</mat-icon>
           </button>
-        </td>
-      </tr>
-    </table>
-  </mat-card>
+        </mat-cell>
+      </ng-container>
 
- -->
- <div class="add-button">
-  <button mat-fab
-          (click)="openEditDialog('', formSection)"
-          color="accent">
-    <mat-icon>add</mat-icon>
-  </button>
+      <mat-header-row *matHeaderRowDef="displayedUserColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedUserColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <div fxLayout="row">
+    <mat-table [dataSource]="dataSource"
+               *ngIf="formSection && formSection !== 'users'"
+               #table>
+
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef fxFlex="15"> TITLE </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="15"> {{element.title}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef fxFlex="35"> DESCRIPTION </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="35"> {{element.description | truncate: 120}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef fxFlex="20"> DATE </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="20"> {{ element.date | date:'fullDate'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="time" >
+        <mat-header-cell *matHeaderCellDef fxFlex="5"> TIME </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="5"> {{element.time}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef fxFlex="20"> IMAGE </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="20"> {{element.image.title | truncate:20:true}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef fxFlex="5"></mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="5">
+          <button mat-icon-button
+                  (click)="openEditDialog(element, formSection)"
+                  color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef fxFlex="5"></mat-header-cell>
+        <mat-cell *matCellDef="let element" fxFlex="5">
+          <button mat-icon-button
+                  (click)="openNotifyDialog(element, formSection)"
+                  color="primary">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
 </div>
+
+  <div class="add-button">
+    <button mat-fab
+            (click)="openEditDialog('', formSection)"
+            color="accent">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>

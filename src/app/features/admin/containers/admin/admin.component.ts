@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
+import {trigger,
+  animate,
+  style,
+  group,
+  animateChild,
+  query,
+  stagger,
+  transition,
+  useAnimation} from '@angular/animations';
+
+import { Observable } from 'rxjs/Observable';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,13 +24,29 @@ import { JobsService } from './../../../jobs/jobs.service';
 import { UserService } from './../../../../core/services/user/user.service';
 import { UsersService } from './../../../../core/services/users/users.service';
 
+import { enterUpAnimation } from './../../../../shared/animations/animations';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
+  animations: [
+    trigger('enterUp', [
+      transition('* => *', [
+        query('mat-row', style({ opacity: 0, transform: 'translateY(20px)' }), { optional: true }),
+        query('mat-row:not(:leave)',
+          stagger('100ms', [
+            animate('300ms ease-in')
+          ]),
+          { optional: true }
+        ),
+        // query(':leave', style({ visibility: 'hidden' }), { optional: true }),
+      ])
+    ]),
+  ]
 })
 export class AdminComponent implements OnInit {
-  formSection = 'events';
+  formSection: string;
   events$: Observable<IEvent[]>;
   news$: Observable<INew[]>;
   jobs$: Observable<IJob[]>;
@@ -49,6 +75,7 @@ export class AdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.formSection = 'events';
     this.events$ = this.eventsService.collection$;
     this.news$ = this.newsService.collection$;
     this.jobs$ = this.jobsService.collection$;

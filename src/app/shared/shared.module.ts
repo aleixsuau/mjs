@@ -31,6 +31,7 @@ import { UppercaserPipe } from './pipes/uppercaser/uppercaser.pipe';
 import { FilterPipe } from './pipes/filter/filter.pipe';
 import { InputFileComponent } from './components/input-file/input-file.component';
 import { TruncatePipe } from './pipes/truncate/truncate.pipe';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { TruncatePipe } from './pipes/truncate/truncate.pipe';
     UppercaserPipe,
     FilterPipe,
     TruncatePipe,
+    CardComponent,
   ],
   providers: [
     UploadService
@@ -85,6 +87,7 @@ import { TruncatePipe } from './pipes/truncate/truncate.pipe';
     FlexLayoutModule,
     DialogComponent,
     InputFileComponent,
+    CardComponent,
     UppercaserPipe,
     FilterPipe,
     TruncatePipe,

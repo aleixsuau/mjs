@@ -1,11 +1,12 @@
 @import "~_variables.scss";
 
-img {
-  filter: grayscale(100%);
-}
-
 .slider-container {
   position: relative;
+  min-height: 488px;
+}
+
+.item-container {
+  min-height: 488px;
 }
 
 .item-background {
@@ -21,7 +22,8 @@ img {
   z-index: 2;
 }
 
-.item-circle {
+
+/* .item-circle {
   position: absolute;
   width: 65%;
   top: 25%;
@@ -31,24 +33,34 @@ img {
   border-radius: 100%;
 }
 
-.item-circle2 {
-  position: absolute;
-  height: 70%;
-  width: 70%;
-  background-color: rgba(171, 171, 172, 0.48);
-  border-radius: 50%;
-  top: 40%;
-  left: -10%;
-  transform: rotate(-30deg);
-}
-
 .item-circle3 {
   position: absolute;
   width: 60%;
   height: 70%;
   background-color: rgba(212, 212, 212, 0.58);
   border-radius: 50%;
+} */
+
+.text-background {
+  position: absolute;
+  width: 165%;
+  top: 40%;
+  left: -110%;
+  background-color: rgba(204, 204, 204, 0.4);
+  height: 150%;
+  transform: rotate(140deg);
 }
+
+.text-background2 {
+  position: absolute;
+  height: 70%;
+  width: 70%;
+  background-color: rgba(171, 171, 172, 0.38);
+  top: 40%;
+  left: -10%;
+  transform: rotate(-30deg);
+}
+
 
 .circle-button-right, .circle-button-left {
   position: absolute;

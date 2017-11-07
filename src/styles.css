@@ -47,10 +47,6 @@ mat-card-actions {
   margin: 5px;
 }
 
-.mat-sidenav-content {
-  min-height: 100vh;
-}
-
 .mat-card-subtitle {
   margin-bottom: 0px !important;
 }

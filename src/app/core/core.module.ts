@@ -10,6 +10,7 @@ import { AuthService } from './services/auth/auth.service';
 import { ImageResizerService } from './services/image-resizer/image-resizer.service';
 import { UserService } from './services/user/user.service';
 import { UsersService } from './services/users/users.service';
+import { ScrollToService } from './services/scroll-to/scroll-to.service';
 import { CanActivateAdminService } from './guards/admin/can-activate-admin.service';
 import { TestingService } from './services/testing/testing.service';
 
@@ -33,6 +34,7 @@ import { LoginMenuComponent } from './login-menu/login-menu.component';
     ImageResizerService,
     UserService,
     UsersService,
+    ScrollToService,
     CanActivateAdminService,
     // TODO: Remove this service
     TestingService

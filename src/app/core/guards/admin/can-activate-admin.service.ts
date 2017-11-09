@@ -15,7 +15,6 @@ export class CanActivateAdminService {
     return this.userService
                   .user$
                   .map((user) => {
-                    console.log('user: ', user);
                     return user && user.role === 'admin';
                   });
   }

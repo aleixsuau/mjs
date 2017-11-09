@@ -3,16 +3,15 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 
 import { Observable } from 'rxjs/Observable';
 
-import { EventsService } from './../../../agenda/services/events.service';
-
+import { AgendaService } from './../agenda/agenda.service';
 
 @Injectable()
 export class AgendaResolverService implements Resolve<IEvent> {
-  constructor(private eventsService: EventsService) {}
+  constructor(private agendaService: AgendaService) {}
 
   resolve(activeRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IEvent> {
     const id = activeRoute.params['id'];
-    return this.eventsService
+    return this.agendaService
                   .readOne(id)
                   .take(1);
   }

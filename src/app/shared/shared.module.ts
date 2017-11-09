@@ -24,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Components
 import { DialogComponent } from './components/dialog/dialog.component';
+import { SectionComponent } from './components/section/section.component';
 
 // Services
 import { UploadService } from './services/upload/upload.service';
@@ -63,6 +64,7 @@ import { CardComponent } from './components/card/card.component';
     FilterPipe,
     TruncatePipe,
     CardComponent,
+    SectionComponent,
   ],
   providers: [
     UploadService
@@ -88,6 +90,7 @@ import { CardComponent } from './components/card/card.component';
     DialogComponent,
     InputFileComponent,
     CardComponent,
+    SectionComponent,
     UppercaserPipe,
     FilterPipe,
     TruncatePipe,

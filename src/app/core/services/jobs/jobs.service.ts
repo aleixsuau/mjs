@@ -11,9 +11,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 @Injectable()
 export class JobsService {
 
-    private store: IEvent[] = [];
-    private _collection: BehaviorSubject<IEvent[]> = new BehaviorSubject([]);
-    readonly collection$: Observable<IEvent[]> = this._collection.asObservable().publishReplay(1).refCount();
+    private store: IJob[] = [];
+    private _collection: BehaviorSubject<IJob[]> = new BehaviorSubject([]);
+    readonly collection$: Observable<IJob[]> = this._collection.asObservable().publishReplay(1).refCount();
     private endPoint: string;
 
     constructor(
@@ -23,7 +23,7 @@ export class JobsService {
         this.read();
     }
 
-    create(item: IEvent) {
+    create(item: IJob) {
       const id = this.db.list(this.endPoint).push(null).key;
       item.id = id;
       this.db.list(this.endPoint).set(id, item);
@@ -33,9 +33,13 @@ export class JobsService {
         this.db.list(this.endPoint)
                   .valueChanges()
                   .subscribe((response) => {
-                    this.store = response as IEvent[];
+                    this.store = response as IJob[];
                     this._collection.next(this.store);
                   });
+    }
+
+    readOne(id: string): Observable<IJob> {
+      return this.db.object(`${this.endPoint}/${id}`).valueChanges();
     }
 
     update(item) {

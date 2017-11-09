@@ -1,32 +1,50 @@
+import { SectionResolverService } from './../services/section-resolver/section-resolver.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './../../features/home/containers/home/home.component';
-import { AgendaPreviewComponent } from './../../features/agenda/containers/agenda-preview/agenda-preview.component';
-import { AgendaComponent } from './../../features/agenda/containers/agenda/agenda.component';
-import { NewsPreviewComponent } from './../../features/news/containers/news-preview/news-preview.component';
-import { JobsPreviewComponent } from './../../features/jobs/containers/jobs-preview/jobs-preview.component';
+import { SectionComponent } from './../../shared/components/section/section.component';
 import { AdminComponent } from './../../features/admin/containers/admin/admin.component';
-import { AnimationsComponent } from './../../features/animations/animations.component';
 
-import { AgendaResolverService } from './../../features/agenda/services/agenda-resolver/agenda-resolver.service';
+import { AgendaResolverService } from './../../core/services/agenda-resolver/agenda-resolver.service';
 import { CanActivateAdminService } from './../guards/admin/can-activate-admin.service';
 
 
 const routes: Routes = [
-  { path: 'animations', component: AnimationsComponent },
+  {
+    path: 'agenda',
+    component: SectionComponent,
+    resolve: { data: SectionResolverService }
+  },
   {
     path: 'agenda/:id',
-    component: AgendaComponent,
-    resolve: {
-        event: AgendaResolverService
+    component: SectionComponent,
+    resolve: { data: SectionResolverService }
+  },
+  {
+    path: 'jobs',
+    component: SectionComponent,
+    resolve: { data: SectionResolverService }
+  },
+  {
+    path: 'jobs/:id',
+    component: SectionComponent,
+    resolve: { data: SectionResolverService }
+  },
+  {
+    path: 'news',
+    component: SectionComponent,
+    resolve: { data: SectionResolverService,
     }
   },
-  { path: 'agenda', component: AgendaComponent },
-  { path: 'jobs', component: JobsPreviewComponent },
-  { path: 'news', component: NewsPreviewComponent },
-  { path: 'admin', canActivate: [CanActivateAdminService], component: AdminComponent },
+  {
+    path: 'news/:id',
+    component: SectionComponent,
+    resolve: { data: SectionResolverService,
+    }
+  },
+  { path: 'admin', canActivate: [ CanActivateAdminService ], component: AdminComponent },
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: '**', component: HomeComponent },
 ];

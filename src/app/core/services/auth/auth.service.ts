@@ -11,8 +11,6 @@ import { AngularFireAuth } from 'angularfire2/auth/auth';
 import { UserService } from './../user/user.service';
 import { UsersService } from './../users/users.service';
 
-
-
 @Injectable()
 export class AuthService {
 

@@ -3,9 +3,9 @@ import { useAnimation, transition, trigger, style, animate } from '@angular/anim
 import { fadeAnimation } from './../../../../shared/animations/animations';
 import { Observable } from 'rxjs/Observable';
 
-import { NewsService } from './../../../news/news.service';
-import { JobsService } from './../../../jobs/jobs.service';
-import { EventsService } from './../../../agenda/services/events.service';
+import { AgendaService } from './../../../../core/services/agenda/agenda.service';
+import { JobsService } from './../../../../core/services/jobs/jobs.service';
+import { NewsService } from './../../../../core/services/news/news.service';
 
 @Component({
   selector: 'app-home',
@@ -31,13 +31,13 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
-    private eventsService: EventsService,
+    private agendaService: AgendaService,
     private newsService: NewsService,
     private jobsService: JobsService,
   ) { }
 
   ngOnInit() {
-    this.eventsService
+    this.agendaService
             .collection$
             .subscribe((events) => {
               this.events = events;

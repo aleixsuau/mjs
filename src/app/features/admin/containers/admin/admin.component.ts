@@ -18,9 +18,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from './../../components/edit-dialog/edit-dialog.component';
 import { DialogComponent } from './../../../../shared/components/dialog/dialog.component';
 
-import { EventsService } from './../../../agenda/services/events.service';
-import { NewsService } from './../../../news/news.service';
-import { JobsService } from './../../../jobs/jobs.service';
+import { AgendaService } from './../../../../core/services/agenda/agenda.service';
+import { JobsService } from './../../../../core/services/jobs/jobs.service';
+import { NewsService } from './../../../../core/services/news/news.service';
+
+
+
 import { UserService } from './../../../../core/services/user/user.service';
 import { UsersService } from './../../../../core/services/users/users.service';
 
@@ -65,7 +68,7 @@ export class AdminComponent implements OnInit {
   usersSource: DataSourceGenerator;
 
   constructor(
-    private eventsService: EventsService,
+    private agendaService: AgendaService,
     private newsService: NewsService,
     private jobsService: JobsService,
     private userService: UserService,
@@ -76,7 +79,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.formSection = 'events';
-    this.events$ = this.eventsService.collection$;
+    this.events$ = this.agendaService.collection$;
     this.news$ = this.newsService.collection$;
     this.jobs$ = this.jobsService.collection$;
     this.users$ = this.usersService.collection$;

@@ -62,8 +62,8 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     AngularFireDatabaseModule,
     // Custom modules
     AppRoutingModule,
-    SharedModule,
     CoreModule,
+    SharedModule,
     FeaturesModule
   ],
   providers: [

@@ -1,3 +1,4 @@
+import { SectionResolverService } from './services/section-resolver/section-resolver.service';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../shared/shared.module';
@@ -6,6 +7,10 @@ import { FirebaseUIModule } from 'firebaseui-angular';
 import { customHttpProvider } from './services/custom-http/custom-http.service';
 import { CustomHttpService } from './services/custom-http/custom-http.service';
 export { CustomHttpService } from './services/custom-http/custom-http.service';
+import { AgendaResolverService } from './services/agenda-resolver/agenda-resolver.service';
+import { AgendaService } from './services/agenda/agenda.service';
+import { JobsService } from './services/jobs/jobs.service';
+import { NewsService } from './services/news/news.service';
 import { AuthService } from './services/auth/auth.service';
 import { ImageResizerService } from './services/image-resizer/image-resizer.service';
 import { UserService } from './services/user/user.service';
@@ -32,6 +37,11 @@ import { LoginMenuComponent } from './login-menu/login-menu.component';
     customHttpProvider,
     AuthService,
     ImageResizerService,
+    AgendaService,
+    AgendaResolverService,
+    SectionResolverService,
+    JobsService,
+    NewsService,
     UserService,
     UsersService,
     ScrollToService,

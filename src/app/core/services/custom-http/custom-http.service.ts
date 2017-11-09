@@ -16,10 +16,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class CustomHttpService extends Http {
 
   private _loading: BehaviorSubject<Boolean> = new BehaviorSubject(false);
-  readonly loading: Observable<Boolean> = this._loading.asObservable().share();
+  readonly loading$: Observable<Boolean> = this._loading.asObservable().share();
 
   private _error: BehaviorSubject<any> = new BehaviorSubject({});
-  readonly error: Observable<any> = this._error.asObservable().share();
+  readonly error$: Observable<any> = this._error.asObservable().share();
 
   constructor(
     backend: ConnectionBackend,
@@ -31,7 +31,6 @@ export class CustomHttpService extends Http {
   // Intercept the Http action & track its status (loading/not loading, error)
   intercept(action: string, url: string, body?: any, options?: RequestOptionsArgs): Observable<any> {
     this._loading.next(true);
-    console.log('Intercept: ', action, url);
     return super[action](url, body, options)
               .do(
                 (res: Response) => this._loading.next(false),
@@ -41,7 +40,6 @@ export class CustomHttpService extends Http {
   }
 
   get(url: string, options?: RequestOptionsArgs): Observable<any> {
-    console.log('Get: ', url);
     return this.intercept('get', url, null, options);
   }
 

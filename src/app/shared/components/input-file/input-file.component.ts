@@ -34,7 +34,6 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
         this.uploadBar.nativeElement.style.width = '100%';
         this.readImage(file);
       };
-      console.log('onModelChange: ', file);
       fn(file);
     };
   }

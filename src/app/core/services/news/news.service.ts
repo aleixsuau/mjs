@@ -1,4 +1,3 @@
-import { CustomHttpService } from './../../../core/services/custom-http/custom-http.service';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -7,41 +6,38 @@ import 'rxjs/add/operator/publishReplay';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { environment } from './../../../../environments/environment.prod';
-
 
 @Injectable()
-export class EventsService {
+export class NewsService {
 
-    private store: IEvent[] = [];
-    private _collection: BehaviorSubject<IEvent[]> = new BehaviorSubject([]);
-    readonly collection$: Observable<IEvent[]> = this._collection.asObservable().publishReplay(1).refCount();
+    private store: INew[] = [];
+    private _collection: BehaviorSubject<INew[]> = new BehaviorSubject([]);
+    readonly collection$: Observable<INew[]> = this._collection.asObservable().publishReplay(1).refCount();
     private endPoint: string;
 
     constructor(
       private db: AngularFireDatabase,
     ) {
-        this.endPoint = `events`;
+        this.endPoint = `news`;
         this.read();
     }
 
-    create(item: IEvent) {
-        const id = this.db.list(this.endPoint).push(null).key;
-        item.id = id;
-        this.db.list(this.endPoint).set(id, item);
+    create(item: INew) {
+      const id = this.db.list(this.endPoint).push(null).key;
+      item.id = id;
+      this.db.list(this.endPoint).set(id, item);
     }
 
     read() {
       this.db.list(this.endPoint)
                 .valueChanges()
-                .subscribe((response: IEvent[]) => {
-                  this.store = response;
-                  console.log('Events: ', response);
+                .subscribe((response) => {
+                  this.store = response as INew[];
                   this._collection.next(this.store);
                 });
     }
 
-    readOne(id: string): Observable<IEvent> {
+    readOne(id: string): Observable<INew> {
       return this.db.object(`${this.endPoint}/${id}`).valueChanges();
     }
 
@@ -50,7 +46,7 @@ export class EventsService {
     }
 
     delete(item) {
-        this.db.object(`${this.endPoint}/${item.id}`).remove();
+      this.db.object(`${this.endPoint}/${item.id}`).remove();
     }
 
     private handleError (error: Response | any) {

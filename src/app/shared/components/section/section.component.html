@@ -1,0 +1,30 @@
+<div *ngIf="highlight"
+     @fade
+     [@selected]="highlight.id"
+     class="selected-item">
+  <mat-card>
+    <div [ngStyle]="{ 'background-image': 'url(' + highlight?.image?.url + ')',
+                      'background-size': 'cover',
+                      'background-repeat': 'no-repeat',
+                      'background-position': 'center center' }"
+                      class="item-image"></div>
+  </mat-card>
+  <div class="item-description">
+    <h1>{{ highlight?.title | uppercase }}</h1>
+    <h4>{{ highlight?.date | date:'EE, d/MM/y' }},  {{ highlight?.time }}h</h4>
+    <p>{{ highlight.description }}</p>
+  </div>
+</div>
+<div class="cards-container">
+  <div fxLayoutWrap>
+    <div *ngFor="let item of collection"
+         @EnterUp
+         fxFlex="100"
+         fxFlex.gt-sm="50">
+         <app-card [item]="item"
+                   routerLink="/{{ section }}/{{ item?.id }}"
+                   (click)="scrollUp()">
+         </app-card>
+    </div>
+  </div>
+</div>

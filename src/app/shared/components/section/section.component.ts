@@ -1,5 +1,3 @@
-import { ScrollToService } from './../../../../core/services/scroll-to/scroll-to.service';
-import { EventsService } from './../../services/events.service';
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {trigger,
@@ -13,14 +11,13 @@ import {trigger,
   useAnimation} from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
-
-import { fadeAnimation } from './../../../../shared/animations/animations';
-
+import { ScrollToService } from './../../../core/services/scroll-to/scroll-to.service';
+import { fadeAnimation } from './../../animations/animations';
 
 @Component({
-  selector: 'app-agenda',
-  templateUrl: './agenda.component.html',
-  styleUrls: ['./agenda.component.scss'],
+  selector: 'app-section',
+  templateUrl: './section.component.html',
+  styleUrls: ['./section.component.scss'],
   animations: [
     trigger('EnterUp', [
       transition(':enter', [
@@ -44,39 +41,30 @@ import { fadeAnimation } from './../../../../shared/animations/animations';
     ])
   ],
 })
-export class AgendaComponent implements OnInit, AfterContentInit {
-  selectedEvent: IEvent;
-  events: Observable<IEvent[]>;
+export class SectionComponent implements OnInit {
+  section: string;
+  highlight: IEvent | IJob | INew;
+  collection: IEvent[] | IJob[] | INew[];
 
   constructor(
     private route: ActivatedRoute,
-    private eventsService: EventsService,
-    private scrollToService: ScrollToService
-  ) { }
+    private scrollToService: ScrollToService,
+  ) {}
 
   ngOnInit() {
     if (this.route.data) {
       this.route
             .data
-            .pluck('event')
-            .subscribe((response: IEvent) => {
-                          this.selectedEvent = response;
-                          this.filterCollection();
-                        });
+            .subscribe((response: any) => {
+                        this.section = response.data.section;
+                        this.highlight = response.data.highlight;
+                        this.collection = response.data.collection;
+                      });
     }
-  }
-
-  ngAfterContentInit() {
-    // window.scrollTo(0, 0);
   }
 
   scrollUp() {
     this.scrollToService.scrollTo(800, 0);
-  }
-
-  filterCollection() {
-    this.events = this.eventsService
-                          .collection$;
   }
 
 }

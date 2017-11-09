@@ -13,11 +13,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './core/app-routing/app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { HomeModule } from './features/home/home.module';
-import { AgendaModule } from './features/agenda/agenda.module';
-import { NewsModule } from './features/news/news.module';
-import { JobsModule } from './features/jobs/jobs.module';
-import { AdminModule } from './features/admin/admin.module';
+import { FeaturesModule } from './features/features.module';
 
 import { AppComponent } from './app.component';
 // Gestures support
@@ -68,11 +64,7 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    HomeModule,
-    AgendaModule,
-    NewsModule,
-    JobsModule,
-    AdminModule
+    FeaturesModule
   ],
   providers: [
     AppConfig

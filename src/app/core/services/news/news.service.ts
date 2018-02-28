@@ -38,7 +38,7 @@ export class NewsService {
     }
 
     readOne(id: string): Observable<INew> {
-      return this.db.object(`${this.endPoint}/${id}`).valueChanges();
+      return this.db.object(`${this.endPoint}/${id}`).valueChanges() as Observable<INew>;
     }
 
     update(item) {

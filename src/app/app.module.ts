@@ -22,7 +22,6 @@ import 'hammerjs';
 import { AppConfig } from './app.config';
 
 import { AdminComponent } from './features/admin/containers/admin/admin.component';
-import { AnimationsComponent } from './features/animations/animations.component';
 
 import { enableProdMode } from '@angular/core';
 
@@ -45,7 +44,6 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    AnimationsComponent,
   ],
   imports: [
     BrowserModule,

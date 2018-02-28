@@ -41,7 +41,7 @@ export class AgendaService {
     }
 
     readOne(id: string): Observable<IEvent> {
-      return this.db.object(`${this.endPoint}/${id}`).valueChanges();
+      return this.db.object(`${this.endPoint}/${id}`).valueChanges() as Observable<IEvent>;
     }
 
     update(item) {

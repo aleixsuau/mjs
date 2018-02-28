@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from './../../shared/shared.module';
 
+import { AdminRoutingModule } from './admin-routing.module';
+
 import { AdminComponent } from './containers/admin/admin.component';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { DialogComponent } from './../../shared/components/dialog/dialog.component';
@@ -9,6 +11,7 @@ import { DialogComponent } from './../../shared/components/dialog/dialog.compone
 @NgModule({
   imports: [
     SharedModule,
+    AdminRoutingModule,
   ],
   declarations: [
     AdminComponent,
@@ -17,6 +20,6 @@ import { DialogComponent } from './../../shared/components/dialog/dialog.compone
   entryComponents: [
     EditDialogComponent,
     DialogComponent
-  ]
+  ],
 })
 export class AdminModule { }

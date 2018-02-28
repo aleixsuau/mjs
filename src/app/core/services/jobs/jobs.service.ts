@@ -39,7 +39,7 @@ export class JobsService {
     }
 
     readOne(id: string): Observable<IJob> {
-      return this.db.object(`${this.endPoint}/${id}`).valueChanges();
+      return this.db.object(`${this.endPoint}/${id}`).valueChanges() as Observable<IJob>;
     }
 
     update(item) {

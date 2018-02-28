@@ -14,7 +14,10 @@ export class CanActivateAdminService {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.userService
                   .user$
+                  // TODO: Continue from here
+                  // .filter(user => user)
                   .map((user) => {
+                    console.log('user: ', user);
                     return user && user.role === 'admin';
                   });
   }

@@ -1,4 +1,3 @@
-import { SectionResolverService } from './../services/section-resolver/section-resolver.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,9 +6,8 @@ import { HomeComponent } from './../../features/home/containers/home/home.compon
 import { SectionComponent } from './../../shared/components/section/section.component';
 import { AdminComponent } from './../../features/admin/containers/admin/admin.component';
 
-import { AgendaResolverService } from './../../core/services/agenda-resolver/agenda-resolver.service';
 import { CanActivateAdminService } from './../guards/admin/can-activate-admin.service';
-
+import { SectionResolverService } from './../services/section-resolver/section-resolver.service';
 
 const routes: Routes = [
   {
@@ -45,6 +43,10 @@ const routes: Routes = [
     }
   },
   { path: 'admin', canActivate: [ CanActivateAdminService ], component: AdminComponent },
+  /* {
+    path: 'admin',
+    loadChildren: 'app/features/admin/admin.module#AdminModule',
+  }, */
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: '**', component: HomeComponent },
 ];

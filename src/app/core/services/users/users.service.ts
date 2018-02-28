@@ -38,8 +38,7 @@ export class UsersService {
     }
 
     readOne(id: string): Observable<IUser> {
-      return this.db.object(`${this.endPoint}/${id}`)
-                        .valueChanges();
+      return this.db.object(`${this.endPoint}/${id}`).valueChanges() as Observable<IUser>;
     }
 
     update(item) {

@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
-@import '~https://fonts.googleapis.com/icon?family=Roboto';
-@import '~https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400';
-@import '~https://fonts.googleapis.com/css?family=Barrio|Nunito:300,300i,400';
-@import '~https://fonts.googleapis.com/css?family=Raleway:300,300i,400';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import 'https://fonts.googleapis.com/icon?family=Roboto';
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:300,300i,400';
+@import 'https://fonts.googleapis.com/css?family=Barrio|Nunito:300,300i,400';
+@import 'https://fonts.googleapis.com/css?family=Raleway:300,300i,400';
 
 
 /* CUSTOM OVERWRITES */

@@ -5,7 +5,6 @@ import 'rxjs/add/operator/publishReplay';
 
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { UploadTaskSnapshot } from 'firebase/storage';
 
 import { Upload } from './upload';
@@ -19,7 +18,7 @@ export class UploadService {
   readonly upload: Observable<Upload> = this._upload.asObservable().share().filter(upload => upload != null);
   private storageRef;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor() {
     this.storageRef = firebase.storage().ref();
   }
 

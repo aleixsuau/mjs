@@ -7,7 +7,6 @@ import { FirebaseUIModule } from 'firebaseui-angular';
 import { customHttpProvider } from './services/custom-http/custom-http.service';
 import { CustomHttpService } from './services/custom-http/custom-http.service';
 export { CustomHttpService } from './services/custom-http/custom-http.service';
-import { AgendaResolverService } from './services/agenda-resolver/agenda-resolver.service';
 import { AgendaService } from './services/agenda/agenda.service';
 import { JobsService } from './services/jobs/jobs.service';
 import { NewsService } from './services/news/news.service';
@@ -38,7 +37,6 @@ import { LoginMenuComponent } from './login-menu/login-menu.component';
     AuthService,
     ImageResizerService,
     AgendaService,
-    AgendaResolverService,
     SectionResolverService,
     JobsService,
     NewsService,

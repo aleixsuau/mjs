@@ -50,19 +50,14 @@ import { enterUpAnimation } from './../../../../shared/animations/animations';
 })
 export class AdminComponent implements OnInit {
   formSection: string;
-  events$: Observable<IEvent[]>;
+  agenda$: Observable<IEvent[]>;
   news$: Observable<INew[]>;
   jobs$: Observable<IJob[]>;
   users$: Observable<IUser[]>;
   user$: Observable<IUser>;
-  eventsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
-  newsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
-  jobsTableColumns = [{ name: 'title', label: 'TITLE' }, { name: 'description', label: 'DESCRIPTION' }, { name: 'date', label: 'DATE' }, { name: 'time', label: 'TIME' }, { name: 'image', label: 'IMAGE' }];
 
-  displayedColumns = ['title', 'description', 'date', 'time', 'image', 'edit', 'delete'];
-  displayedUserColumns = ['image', 'name', 'role', 'delete' ];
   dataSource: DataSourceGenerator;
-  eventsSource: DataSourceGenerator;
+  agendaSource: DataSourceGenerator;
   newsSource: DataSourceGenerator;
   jobsSource: DataSourceGenerator;
   usersSource: DataSourceGenerator;
@@ -78,14 +73,14 @@ export class AdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.formSection = 'events';
-    this.events$ = this.agendaService.collection$;
+    this.formSection = 'agenda';
+    this.agenda$ = this.agendaService.collection$;
     this.news$ = this.newsService.collection$;
     this.jobs$ = this.jobsService.collection$;
     this.users$ = this.usersService.collection$;
     this.user$ = this.userService.user$;
 
-    this.eventsSource = new DataSourceGenerator(this.events$);
+    this.agendaSource = new DataSourceGenerator(this.agenda$);
     this.newsSource = new DataSourceGenerator(this.news$);
     this.jobsSource = new DataSourceGenerator(this.jobs$);
     this.usersSource = new DataSourceGenerator(this.users$);
@@ -98,10 +93,7 @@ export class AdminComponent implements OnInit {
   }
 
   openEditDialog(item, section) {
-    const data = {
-      item,
-      section
-    };
+    const data = {item, section};
     const EditDialogRef = this.dialog.open(EditDialogComponent, { data });
     EditDialogRef
         .afterClosed()
@@ -138,10 +130,13 @@ export class AdminComponent implements OnInit {
   generateDataSource(target) {
     this.dataSource = new DataSourceGenerator(this[`${target}$`]);
   }
+
+  trackByFn(index, item) {
+    return item.id;
+  }
 }
 
 export class DataSourceGenerator extends DataSource<any> {
-
   constructor(private data) {
     super();
   }

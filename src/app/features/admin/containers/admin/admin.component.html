@@ -1,9 +1,9 @@
 <div class="buttons-container">
   <button mat-raised-button
-          (click)="formSection = 'events'; generateDataSource(formSection);"
-          [ngClass]="{ 'active': formSection === 'events' }"
+          (click)="formSection = 'agenda'; generateDataSource(formSection);"
+          [ngClass]="{ 'active': formSection === 'agenda' }"
           class="round-button">
-          EVENTS
+          AGENDA
   </button>
   <button mat-raised-button
           (click)="formSection = 'news'; generateDataSource(formSection);"
@@ -74,19 +74,40 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedUserColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedUserColumns;"></mat-row>
+      <mat-header-row *matHeaderRowDef="['image', 'name', 'role', 'delete']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['image', 'name', 'role', 'delete'];"></mat-row>
     </mat-table>
   </div>
 
   <div fxLayout="row">
     <mat-table [dataSource]="dataSource"
+               [trackBy]="trackByFn"
                *ngIf="formSection && formSection !== 'users'"
                #table>
 
+      <mat-header-row *matHeaderRowDef="['image', 'title', 'description', 'date', 'time', 'edit', 'delete']"></mat-header-row>
+      <mat-row *matRowDef="let element; columns: ['image', 'title', 'description', 'date', 'time', 'edit', 'delete']"
+               (click)="openEditDialog(element, formSection)">
+      </mat-row>
+
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef fxFlex="15">IMAGE</mat-header-cell>
+        <mat-cell *matCellDef="let element"
+                  fxFlex="15"
+                  [ngStyle]="{ 'background-image': 'url(' + element?.image?.url + ')',
+                               'background-size': 'cover',
+                               'background-repeat': 'no-repeat',
+                               'background-position': 'center center' }"
+                  class="item_image">
+        </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef fxFlex="15"> TITLE </mat-header-cell>
-        <mat-cell *matCellDef="let element" fxFlex="15"> {{element.title}} </mat-cell>
+        <mat-cell *matCellDef="let element"
+                  fxFlex="15">
+                  {{element.title}}
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="description">
@@ -102,11 +123,6 @@
       <ng-container matColumnDef="time" >
         <mat-header-cell *matHeaderCellDef fxFlex="5"> TIME </mat-header-cell>
         <mat-cell *matCellDef="let element" fxFlex="5"> {{element.time}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="image">
-        <mat-header-cell *matHeaderCellDef fxFlex="20"> IMAGE </mat-header-cell>
-        <mat-cell *matCellDef="let element" fxFlex="20"> {{element.image.title | truncate:20:true}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="edit">
@@ -131,16 +147,14 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
 </div>
 
-  <div class="add-button">
-    <button mat-fab
-            (click)="openEditDialog('', formSection)"
-            color="accent">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+<div class="add-button">
+  <button mat-fab
+          (click)="openEditDialog('', formSection)"
+          color="accent">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

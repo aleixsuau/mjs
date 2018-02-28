@@ -41,8 +41,7 @@ describe('TestingService', () => {
       expect(service.getSize()).toBe(2);
   });
 
-  it('should contain an item with value second after deleting the first item',
-    () => {
+  it('should contain an item with value second after deleting the first item', () => {
       const firstItem = 'first';
       const secondItem = 'second';
 

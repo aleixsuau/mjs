@@ -14,13 +14,15 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
   onTouch: Function;
   onModelChange: Function;
   file: any;
+  errorMessage: string;
+
   @ViewChild('uploadBar')
   uploadBar: ElementRef;
 
   constructor() { }
 
   ngOnInit() {
-    if (!this.file) { this.uploadBar.nativeElement.style.width = '0%'; };
+    // if (!this.file) { this.uploadBar.nativeElement.style.width = '0%'; };
   }
 
   registerOnTouched(fn) {
@@ -53,7 +55,10 @@ export class InputFileComponent implements OnInit, ControlValueAccessor {
 
   readImage(image) {
     const reader = new FileReader();
-    reader.onloadend = () => {
+    reader.onerror = (error) => {
+      this.errorMessage = 'There was and error loading the image: ${error}.<br> Please try again.';
+    };
+    reader.onload = () => {
       this.file.url = reader.result;
     };
     reader.readAsDataURL(image);

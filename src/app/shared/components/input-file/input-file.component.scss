@@ -1,3 +1,5 @@
+@import "~_variables.scss";
+
 :host {
   width: 100%;
 }
@@ -5,7 +7,7 @@
 .upload {
   position: relative;
   display: inline-block;
-  width: 100%;
+  width: 0px;
   height: 60px;
   background-color: whitesmoke;
   border-radius: 2px;
@@ -35,7 +37,6 @@
 }
 
 #file-input {
-  // visibility: hidden;
   display: none;
 }
 
@@ -69,4 +70,9 @@
 
 .file-input:hover {
   background: rgb(221, 220, 220);
+}
+
+.error p {
+  color: $warn;
+  padding-bottom: 10px;
 }

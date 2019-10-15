@@ -55,7 +55,6 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
       environment.firebase,
     ),
     AngularFireAuthModule,
-    AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     AngularFireDatabaseModule,
     // Custom modules

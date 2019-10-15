@@ -42,7 +42,11 @@ const routes: Routes = [
     resolve: { data: SectionResolverService,
     }
   },
-  { path: 'admin', canActivate: [ CanActivateAdminService ], component: AdminComponent },
+  {
+    path: 'admin',
+    canActivate: [ CanActivateAdminService ],
+    component: AdminComponent
+  },
   /* {
     path: 'admin',
     loadChildren: 'app/features/admin/admin.module#AdminModule',

@@ -25,6 +25,7 @@ export class AuthService {
             .authState
             .subscribe((response) => {
               if (response) {
+                console.log('response', response)
                 const { displayName, email, photoURL, emailVerified, uid } = response;
                 const user: IUser = { displayName, email, photoURL, emailVerified, uid };
                 this.checkIfUserExist(user)

@@ -7,8 +7,8 @@ import { FooterComponent } from './footer.component';
 // SUITE
 fdescribe('FooterComponent', () => {
   // Suite's vars
-  let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
+  let component: FooterComponent;
   let debugElement: DebugElement;
   let element: HTMLElement;
 
